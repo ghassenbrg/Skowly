@@ -1,5 +1,5 @@
 <h1 align="center">
-<img src="https://i.imgur.com/wsjAtqp.png" alt="Skowly Logo" width="200" height="200">
+<img src="https://i.imgur.com/cTx1ulo.png" alt="Skowly Logo" width="200" height="200">
   <br>
   Skowly
 </h1>
@@ -12,9 +12,6 @@
   <img src="https://i.imgur.com/n5ic0e1.png" alt="Colorful Line Divider">
 </p>
 
-<p align="center">
-  <img src="https://i.imgur.com/cTx1ulo.png" alt="Skowly Screenshot">
-</p>
 
 ## 🚀 Features
 
