@@ -11,7 +11,7 @@ services:
     depends_on:
       - eureka
   skowly-core:
-    image: soft-ib-core:1.0
+    image: skowly-core:1.0
     ports:
       - 8085:8081
     depends_on:
