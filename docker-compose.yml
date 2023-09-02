@@ -1,8 +1,9 @@
 version: "3.7"
 services:
 
-  eureka:
-    image: eureka:1.0
+  eureka-server:
+    image: eureka-server:1.0.0-SNAPSHOT
+    container_name: eureka-server
     ports:
       - "8761:8761"
     networks:
@@ -13,68 +14,112 @@ services:
       timeout: 5s
       retries: 5
 
-  zuul:
-    image: zuul:1.0
+  config-server:
+    image: config-server:1.0.0-SNAPSHOT
+    container_name: config-server
+    hostname: config-server
     ports:
-      - "8862:8862"
+      - "8888:8888"
     networks:
       - skowly-network
+    environment:
+      EUREKA_SERVER_URL: http://eureka-server:8761
     depends_on:
-      eureka:
+      eureka-server:
         condition: service_healthy
-      skowly-ui:
-        condition: service_healthy
-      skowly-core:
-        condition: service_healthy
-      
-  skowly-ui:
-    image: skowly-ui:1.0
-    ports:
-      - "4202:4200"
-    networks:
-      - skowly-network
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:4200"]
+      test: ["CMD", "curl", "-f", "http://localhost:8888/actuator/health"]
       interval: 10s
       timeout: 5s
       retries: 5
-      
+
+  gateway:
+    image: gateway:1.0.0-SNAPSHOT
+    container_name: gateway
+    ports:
+      - "9191:9191"
+    networks:
+      - skowly-network
+    environment:
+      EUREKA_SERVER_URL: http://eureka-server:8761
+      CONFIG_SERVER_URL: http://config-server:8888
+      SKOWLY_CORE_URL: http://skowly-core:8081
+    depends_on:
+      eureka-server:
+        condition: service_healthy
+      config-server:
+        condition: service_healthy
+      skowly-core:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9191/actuator/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  skowly-ui:
+    image: skowly-ui:1.0.0-SNAPSHOT
+    container_name: skowly-ui
+    ports:
+      - "80:80"
+    networks:
+      - skowly-network
+    depends_on:
+      eureka-server:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
   skowly-core:
-    image: skowly-core:1.0
+    image: skowly-core:1.0.0-SNAPSHOT
+    container_name: skowly-core
     ports:
       - "8085:8081"
     networks:
       - skowly-network
+    environment:
+      EUREKA_SERVER_URL: http://eureka-server:8761
+      CONFIG_SERVER_URL: http://config-server:8888
+      DB_URL: jdbc:postgresql://db-skowly-core:5432/skowly_core
+      DB_USER: root
+      DB_PASSWORD: root
     depends_on:
-      db_skowly_core:
+      eureka-server:
+        condition: service_healthy
+      db-skowly-core:
         condition: service_healthy
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8081/actuator/health"]
       interval: 10s
       timeout: 5s
       retries: 5
-      
-  db_skowly_core:
-    image: "mysql:5.7"
+
+  db-skowly-core:
+    image: "postgres:13"
+    container_name: db-skowly-core
     restart: always
     ports:
-      - "3307:3306"
+      - "5433:5432"
     volumes:
-      - skowly_core-data:/var/lib/mysql
+      - skowly-core-data:/var/lib/postgresql/data
     networks:
       - skowly-network
     environment:
-      MYSQL_DATABASE: skowly_core
-      MYSQL_ROOT_PASSWORD: root
+      POSTGRES_DB: skowly_core
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-proot"]
+      test: ["CMD-SHELL", "pg_isready", "-U", "root"]
       interval: 10s
       timeout: 5s
       retries: 5
-      
+
 networks:
   skowly-network:
     driver: bridge
-    
+
 volumes:
-  skowly_core-data:
+  skowly-core-data:
