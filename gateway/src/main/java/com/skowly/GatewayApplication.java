@@ -1,4 +1,4 @@
-package com.skowly.gateway;
+package com.skowly;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
