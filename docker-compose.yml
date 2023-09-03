@@ -76,12 +76,8 @@ services:
         condition: service_healthy
       config-server:
         condition: service_healthy
-      keycloak:
-        condition: service_healthy
-      skowly-core:
-        condition: service_healthy
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://gateway:9191/actuator/health"]
+      test: ["CMD", "curl", "-f", "http://gateway:9191/api/actuator/health"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -120,10 +116,12 @@ services:
     depends_on:
       eureka-server:
         condition: service_healthy
+      config-server:
+        condition: service_healthy
       db-skowly-core:
         condition: service_healthy
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://skowly-core:8081/actuator/health"]
+      test: ["CMD", "curl", "-f", "http://skowly-core:8081/core/actuator/health"]
       interval: 10s
       timeout: 5s
       retries: 5
