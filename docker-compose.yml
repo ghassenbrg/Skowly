@@ -39,8 +39,9 @@ services:
   keycloak:
     image: jboss/keycloak:15.0.2
     container_name: keycloak
+    command: ["-Djboss.socket.binding.port-offset=1010"]
     ports:
-      - "9090:8080"
+      - "9090:9090"
     volumes:
       - keycloak-data:/opt/jboss/keycloak/standalone/data
       - keycloak-config:/opt/jboss/keycloak/standalone/configuration
@@ -69,8 +70,6 @@ services:
     environment:
       EUREKA_SERVER_URL: http://eureka-server:8761
       CONFIG_SERVER_URL: http://config-server:8888
-      KEYCLOAK_ISSUER_URI: http://keycloak:8080/auth/realms/skowly
-      KEYCLOAK_JWK_SET_URI: http://keycloak:8080/auth/realms/skowly/protocol/openid-connect/certs
     depends_on:
       eureka-server:
         condition: service_healthy
@@ -108,8 +107,8 @@ services:
     environment:
       EUREKA_SERVER_URL: http://eureka-server:8761
       CONFIG_SERVER_URL: http://config-server:8888
-      KEYCLOAK_ISSUER_URI: http://keycloak:8080/auth/realms/skowly
-      KEYCLOAK_JWK_SET_URI: http://keycloak:8080/auth/realms/skowly/protocol/openid-connect/certs
+      KEYCLOAK_ISSUER_URI: http://localhost:9090/auth/realms/skowly
+      KEYCLOAK_JWK_SET_URI: http://keycloak:9090/auth/realms/skowly/protocol/openid-connect/certs
       DB_URL: jdbc:postgresql://db-skowly-core:5432/skowly_core
       DB_USER: skowly_core
       DB_PASSWORD: root
