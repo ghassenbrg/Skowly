@@ -17,6 +17,7 @@ jobs:
       uses: actions/setup-java@v2
       with:
         java-version: 17
+        distribution: 'adopt'
 
     - name: Build and test config-server
       run: |
@@ -59,6 +60,7 @@ jobs:
       uses: actions/setup-java@v2
       with:
         java-version: 17
+        distribution: 'adopt'
 
     - name: Run CodeQL Analysis
       uses: github/codeql-action/analyze@v1
