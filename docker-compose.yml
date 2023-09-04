@@ -5,11 +5,13 @@ services:
     image: eureka-server:1.0.0-SNAPSHOT
     container_name: eureka-server
     ports:
-      - "8761:8761"
+      - "${eureka_external_port}:${eureka_internal_port}"
     networks:
       - skowly-network
+    environment:
+      SERVER_PORT: ${eureka_internal_port}
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://eureka-server:8761/actuator/health"]
+      test: ["CMD", "curl", "-f", "http://eureka-server:${eureka_internal_port}/actuator/health"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -19,11 +21,12 @@ services:
     container_name: config-server
     hostname: config-server
     ports:
-      - "8888:8888"
+      - "${config_server_external_port}:${config_server_internal_port}"
     networks:
       - skowly-network
     environment:
-      EUREKA_SERVER_URL: http://eureka-server:8761
+      SERVER_PORT: ${config_server_internal_port}
+      EUREKA_SERVER_URL: http://eureka-server:${eureka_internal_port}
       SPRING_CLOUD_CONFIG_SERVER_NATIVE_SEARCH_LOCATIONS: file:/config-server-files
     volumes:
     - ./config-server-files:/config-server-files
@@ -31,7 +34,7 @@ services:
       eureka-server:
         condition: service_healthy
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://config-server:8888/actuator/health"]
+      test: ["CMD", "curl", "-f", "http://config-server:${config_server_internal_port}/actuator/health"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -39,15 +42,15 @@ services:
   keycloak:
     image: jboss/keycloak:15.0.2
     container_name: keycloak
-    command: ["-Djboss.socket.binding.port-offset=1010"]
+    command: ["-Djboss.socket.binding.port-offset=${keycloak_port_offset}"]
     ports:
-      - "9090:9090"
+      - "${keycloak_external_port}:${keycloak_internal_port}"
     volumes:
       - keycloak-data:/opt/jboss/keycloak/standalone/data
       - keycloak-config:/opt/jboss/keycloak/standalone/configuration
     environment:
-      - KEYCLOAK_USER=admin
-      - KEYCLOAK_PASSWORD=admin
+      - KEYCLOAK_USER=${keycloak_user}
+      - KEYCLOAK_PASSWORD=${keycloak_password}
       - DB_VENDOR=H2
     networks:
       - skowly-network
@@ -55,7 +58,7 @@ services:
       eureka-server:
         condition: service_healthy
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://keycloak:8080/auth"]
+      test: ["CMD", "curl", "-f", "http://keycloak:${keycloak_internal_port}/auth"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -64,20 +67,21 @@ services:
     image: gateway:1.0.0-SNAPSHOT
     container_name: gateway
     ports:
-      - "9191:9191"
+      - "${gateway_external_port}:${gateway_internal_port}"
     networks:
       - skowly-network
     environment:
-      EUREKA_SERVER_URL: http://eureka-server:8761
-      CONFIG_SERVER_URL: http://config-server:8888
-      SKOWLY_CORE_URL: http://skowly-core:8081
+      SERVER_PORT: ${gateway_internal_port}
+      EUREKA_SERVER_URL: http://eureka-server:${eureka_internal_port}
+      CONFIG_SERVER_URL: http://config-server:${config_server_internal_port}
+      SKOWLY_CORE_URL: http://skowly-core:${skowly_core_internal_port}
     depends_on:
       eureka-server:
         condition: service_healthy
       config-server:
         condition: service_healthy
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://gateway:9191/api/actuator/health"]
+      test: ["CMD", "curl", "-f", "http://gateway:${gateway_internal_port}/api/actuator/health"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -86,7 +90,7 @@ services:
     image: skowly-ui:1.0.0-SNAPSHOT
     container_name: skowly-ui
     ports:
-      - "80:80"
+      - "${skowly_ui_external_port}:80"
     networks:
       - skowly-network
     depends_on:
@@ -102,17 +106,18 @@ services:
     image: skowly-core:1.0.0-SNAPSHOT
     container_name: skowly-core
     ports:
-      - "8085:8081"
+      - "${skowly_core_external_port}:${skowly_core_internal_port}"
     networks:
       - skowly-network
     environment:
-      EUREKA_SERVER_URL: http://eureka-server:8761
-      CONFIG_SERVER_URL: http://config-server:8888
-      KEYCLOAK_ISSUER_URI: http://localhost:9090/auth/realms/skowly
-      KEYCLOAK_JWK_SET_URI: http://keycloak:9090/auth/realms/skowly/protocol/openid-connect/certs
-      DB_URL: jdbc:postgresql://db-skowly-core:5432/skowly_core
-      DB_USER: skowly_core
-      DB_PASSWORD: root
+      SERVER_PORT: ${skowly_core_internal_port}
+      EUREKA_SERVER_URL: http://eureka-server:${eureka_internal_port}
+      CONFIG_SERVER_URL: http://config-server:${config_server_internal_port}
+      KEYCLOAK_ISSUER_URI: http://localhost:${keycloak_internal_port}/auth/realms/skowly
+      KEYCLOAK_JWK_SET_URI: http://keycloak:${keycloak_internal_port}/auth/realms/${keycloak_realm}/protocol/openid-connect/certs
+      DB_URL: jdbc:postgresql://db-skowly-core:5432/${db_skowly_core_db}
+      DB_USER: ${db_skowly_core_user}
+      DB_PASSWORD: ${db_skowly_core_password}
     depends_on:
       eureka-server:
         condition: service_healthy
@@ -121,7 +126,7 @@ services:
       db-skowly-core:
         condition: service_healthy
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://skowly-core:8081/core/actuator/health"]
+      test: ["CMD", "curl", "-f", "http://skowly-core:${skowly_core_internal_port}/core/actuator/health"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -131,17 +136,17 @@ services:
     container_name: db-skowly-core
     restart: always
     ports:
-      - "5433:5432"
+      - "${db_skowly_core_external_port}:5432"
     volumes:
       - skowly-core-data:/var/lib/postgresql/data
     networks:
       - skowly-network
     environment:
-      POSTGRES_DB: skowly_core
-      POSTGRES_USER: skowly_core
-      POSTGRES_PASSWORD: root
+      POSTGRES_DB: ${db_skowly_core_db}
+      POSTGRES_USER: ${db_skowly_core_user}
+      POSTGRES_PASSWORD: ${db_skowly_core_password}
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -d skowly_core -U skowly_core"]
+      test: ["CMD-SHELL", "pg_isready -d ${db_skowly_core_db} -U ${db_skowly_core_user}"]
       interval: 10s
       timeout: 5s
       retries: 5
