@@ -31,6 +31,7 @@ jobs:
           echo "No changes detected in Config Server. Skipping the job."
           echo "::set-output name=run_job::false"
         fi
+      shell: bash
 
     - name: Build and test config-server
       run: |
@@ -41,6 +42,7 @@ jobs:
         else
           echo "Job skipped."
         fi
+      shell: bash
 
   build-and-test-eureka-server:
     name: Build and Test Eureka Server
@@ -67,6 +69,7 @@ jobs:
           echo "No changes detected in Eureka Server. Skipping the job."
           echo "::set-output name=run_job::false"
         fi
+      shell: bash
 
     - name: Build and test eureka-server
       run: |
@@ -77,6 +80,7 @@ jobs:
         else
           echo "Job skipped."
         fi
+      shell: bash
 
   build-and-test-gateway:
     name: Build and Test Gateway
@@ -103,6 +107,7 @@ jobs:
           echo "No changes detected in Gateway. Skipping the job."
           echo "::set-output name=run_job::false"
         fi
+      shell: bash
 
     - name: Build and test gateway
       run: |
@@ -113,6 +118,7 @@ jobs:
         else
           echo "Job skipped."
         fi
+      shell: bash
 
   build-and-test-skowly-core:
     name: Build and Test Skowly Core
@@ -139,6 +145,7 @@ jobs:
           echo "No changes detected in Skowly Core. Skipping the job."
           echo "::set-output name=run_job::false"
         fi
+      shell: bash
 
     - name: Build and test skowly-core
       run: |
@@ -149,6 +156,7 @@ jobs:
         else
           echo "Job skipped."
         fi
+      shell: bash
 
   build-and-test-skowly-ui:
     name: Build and Test Skowly UI
@@ -175,6 +183,7 @@ jobs:
           echo "No changes detected in Skowly UI. Skipping the job."
           echo "::set-output name=run_job::false"
         fi
+      shell: bash
 
     - name: Build and test skowly-ui
       run: |
@@ -185,3 +194,4 @@ jobs:
         else
           echo "Job skipped."
         fi
+      shell: bash
