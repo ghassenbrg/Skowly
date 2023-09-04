@@ -1,4 +1,4 @@
-name: CI
+name: Microservices CI
 
 on:
   push:
@@ -6,21 +6,59 @@ on:
       - main
 
 jobs:
-  build:
-    runs-on: windows-latest # Use a Windows runner
+  build-and-test:
+    runs-on: ubuntu-latest
 
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Build and test
-      run: |
-        .\build.bat -skipDocker all
-      shell: powershell # Use PowerShell to run the batch script
-
-    - name: Publish test results
-      uses: actions/upload-artifact@v2
+    - name: Set up JDK 17
+      uses: actions/setup-java@v2
       with:
-        name: test-results
-        path: path/to/test/reports  # Update with your actual test reports path
+        java-version: 17
 
+    - name: Build and test config-server
+      run: |
+        cd config-server
+        ./mvnw clean package
+        ./mvnw test
+
+    - name: Build and test eureka-server
+      run: |
+        cd eureka-server
+        ./mvnw clean package
+        ./mvnw test
+
+    - name: Build and test gateway
+      run: |
+        cd gateway
+        ./mvnw clean package
+        ./mvnw test
+
+    - name: Build and test skowly-core
+      run: |
+        cd skowly-core
+        ./mvnw clean package
+        ./mvnw test
+
+    - name: Build and test skowly-ui
+      run: |
+        cd skowly-ui
+        npm install
+        ng test
+
+  code-analysis:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v2
+      with:
+        java-version: 17
+
+    - name: Run CodeQL Analysis
+      uses: github/codeql-action/analyze@v1
