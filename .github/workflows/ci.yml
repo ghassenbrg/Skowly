@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: windows-latest # Use a Windows runner
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Build and test
+      run: |
+        .\build.bat -skipDocker all
+      shell: powershell # Use PowerShell to run the batch script
+
+    - name: Publish test results
+      uses: actions/upload-artifact@v2
+      with:
+        name: test-results
+        path: path/to/test/reports  # Update with your actual test reports path
+
+    - name: Upload Docker images
+      if: github.event_name == 'push'
+      run: |
+        docker push your-image:eureka-server
+        docker push your-image:gateway
+        docker push your-image:config-server
+        docker push your-image:skowly-core
+        docker push your-image:skowly-ui
+
+    - name: Deploy to Docker Compose
+      if: github.event_name == 'push'
+      run: |
+        docker-compose -f your/docker-compose-file.yml up -d
