@@ -24,7 +24,3 @@ jobs:
         name: test-results
         path: path/to/test/reports  # Update with your actual test reports path
 
-    - name: Deploy to Docker Compose
-      if: github.event_name == 'push'
-      run: |
-        docker-compose -f docker-compose-file.yml up -d
