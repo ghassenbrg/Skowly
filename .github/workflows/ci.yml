@@ -1,4 +1,4 @@
-name: Skowly CI
+name: Microservices CI
 
 on:
   push:
@@ -6,16 +6,10 @@ on:
       - main
 
 jobs:
-  build-and-test:
+  build-and-test-config-server:
     runs-on: windows-latest
 
-    strategy:
-      matrix:
-        config-server: ['config-server/']
-        eureka-server: ['eureka-server/']
-        gateway: ['gateway/']
-        skowly-core: ['skowly-core/']
-        skowly-ui: ['skowly-ui/']
+    if: ${{ github.event.commits[0].added | contains('config-server/') || github.event.commits[0].modified | contains('config-server/') }}
 
     steps:
     - name: Checkout code
@@ -27,14 +21,92 @@ jobs:
         java-version: 17
         distribution: 'adopt'
 
-    - name: Build and test
+    - name: Build and test config-server
       run: |
-        $microservice = "${{ matrix.config-server || matrix.eureka-server || matrix.gateway || matrix.skowly-core || matrix.skowly-ui }}"
-        if ($microservice) {
-          Write-Host "Running build and test for $microservice"
-          cd $microservice
-          .\mvnw clean package
-          .\mvnw test
-        } else {
-          Write-Host "No changes detected in microservices. Skipping build and test."
-        }
+        cd config-server
+        .\mvnw clean package
+        .\mvnw test
+
+  build-and-test-eureka-server:
+    runs-on: windows-latest
+
+    if: ${{ github.event.commits[0].added | contains('eureka-server/') || github.event.commits[0].modified | contains('eureka-server/') }}
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v2
+      with:
+        java-version: 17
+        distribution: 'adopt'
+
+    - name: Build and test eureka-server
+      run: |
+        cd eureka-server
+        .\mvnw clean package
+        .\mvnw test
+
+  build-and-test-gateway:
+    runs-on: windows-latest
+
+    if: ${{ github.event.commits[0].added | contains('gateway/') || github.event.commits[0].modified | contains('gateway/') }}
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v2
+      with:
+        java-version: 17
+        distribution: 'adopt'
+
+    - name: Build and test gateway
+      run: |
+        cd gateway
+        .\mvnw clean package
+        .\mvnw test
+
+  build-and-test-skowly-core:
+    runs-on: windows-latest
+
+    if: ${{ github.event.commits[0].added | contains('skowly-core/') || github.event.commits[0].modified | contains('skowly-core/') }}
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v2
+      with:
+        java-version: 17
+        distribution: 'adopt'
+
+    - name: Build and test skowly-core
+      run: |
+        cd skowly-core
+        .\mvnw clean package
+        .\mvnw test
+
+  build-and-test-skowly-ui:
+    runs-on: windows-latest
+
+    if: ${{ github.event.commits[0].added | contains('skowly-ui/') || github.event.commits[0].modified | contains('skowly-ui/') }}
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v2
+      with:
+        java-version: 17
+        distribution: 'adopt'
+
+    - name: Build and test skowly-ui
+      run: |
+        cd skowly-ui
+        npm install
+        npm run test
