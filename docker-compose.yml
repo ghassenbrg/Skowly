@@ -70,6 +70,7 @@ services:
     environment:
       EUREKA_SERVER_URL: http://eureka-server:8761
       CONFIG_SERVER_URL: http://config-server:8888
+      SKOWLY_CORE_URL: http://skowly-core:8081
     depends_on:
       eureka-server:
         condition: service_healthy
