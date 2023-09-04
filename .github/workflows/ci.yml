@@ -27,4 +27,4 @@ jobs:
     - name: Deploy to Docker Compose
       if: github.event_name == 'push'
       run: |
-        docker-compose -f your/docker-compose-file.yml up -d
+        docker-compose -f docker-compose-file.yml up -d
