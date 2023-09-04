@@ -1,5 +1,4 @@
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-
 import { AppModule } from './app/app.module';
 import { enableProdMode } from '@angular/core';
 import { environment } from './environments/environment';
@@ -10,17 +9,16 @@ if (environment.production) {
 }
 
 export const keycloak = new Keycloak({
-  url: 'http://localhost:4200/auth',
-  realm: 'skowly',
-  clientId: 'external-client',
+  url: environment.keycloak_url,
+  realm: environment.keycloak_realm,
+  clientId: environment.keycloak_clientId
 });
 
-keycloak.init({ onLoad: 'login-required' }).then((authenticated) => {
+keycloak.init({ onLoad: 'check-sso' }).then((authenticated) => {
   if (authenticated) {
-    platformBrowserDynamic()
-      .bootstrapModule(AppModule)
-      .catch((err) => console.error(err));
-  } else {
-    // Handle unauthorized access, show a message, etc.
+    // Initialize your application
   }
+  platformBrowserDynamic()
+    .bootstrapModule(AppModule)
+    .catch((err) => console.error(err));
 });
