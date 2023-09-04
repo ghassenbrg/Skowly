@@ -29,9 +29,12 @@ jobs:
 
     - name: Build and test
       run: |
-        microservice=${{ matrix.config-server || matrix.eureka-server || matrix.gateway || matrix.skowly-core || matrix.skowly-ui }}
-        if [[ -n $microservice ]]; then
+        $microservice = "${{ matrix.config-server || matrix.eureka-server || matrix.gateway || matrix.skowly-core || matrix.skowly-ui }}"
+        if ($microservice) {
+          Write-Host "Running build and test for $microservice"
           cd $microservice
           .\mvnw clean package
           .\mvnw test
-        fi
+        } else {
+          Write-Host "No changes detected in microservices. Skipping build and test."
+        }
