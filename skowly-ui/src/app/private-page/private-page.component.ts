@@ -25,7 +25,7 @@ export class PrivatePageComponent {
   }
 
   callHello() {
-    this.http.get('http://localhost:4200/api/core/hello', { responseType: 'text' })
+    this.http.get('/api/core/hello', { responseType: 'text' })
       .subscribe(
         data => {
           this.hello = data;

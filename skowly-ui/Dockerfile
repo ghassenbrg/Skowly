@@ -1,4 +1,3 @@
-
 # Step 1: Build the Angular application
 FROM node:18-alpine AS builder
 WORKDIR /app
@@ -11,7 +10,12 @@ RUN ng build --configuration "production"
 # Step 2: Serve the Angular app from Nginx
 FROM nginx:alpine
 RUN apk --no-cache add curl
+
+# Copy the custom nginx.conf file
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
 RUN rm -rf /usr/share/nginx/html/*
 COPY --from=builder /app/dist/skowly-ui /usr/share/nginx/html
+
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]

@@ -81,7 +81,7 @@ services:
       config-server:
         condition: service_healthy
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://gateway:${gateway_internal_port}/api/actuator/health"]
+      test: ["CMD", "curl", "-f", "http://gateway:${gateway_internal_port}/actuator/health"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -95,6 +95,8 @@ services:
       - skowly-network
     depends_on:
       eureka-server:
+        condition: service_healthy
+      gateway:
         condition: service_healthy
     healthcheck:
       test: ["CMD", "curl", "-f", "http://skowly-ui:80"]
@@ -126,7 +128,7 @@ services:
       db-skowly-core:
         condition: service_healthy
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://skowly-core:${skowly_core_internal_port}/core/actuator/health"]
+      test: ["CMD", "curl", "-f", "http://skowly-core:${skowly_core_internal_port}/api/core/actuator/health"]
       interval: 10s
       timeout: 5s
       retries: 5
