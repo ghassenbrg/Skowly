@@ -1,4 +1,4 @@
-name: Microservices CI
+name: Skowly CI
 
 on:
   push:
@@ -29,16 +29,9 @@ jobs:
 
     - name: Build and test
       run: |
-        microservice=${{ matrix.key }}
-        cd $microservice
-        .\mvnw clean package
-        .\mvnw test
-
-    - name: Build and test skowly-ui
-      run: |
-        microservice=${{ matrix.key }}
-        if [[ $microservice == 'skowly-ui/' ]]; then
+        microservice=${{ matrix.config-server || matrix.eureka-server || matrix.gateway || matrix.skowly-core || matrix.skowly-ui }}
+        if [[ -n $microservice ]]; then
           cd $microservice
-          npm install
-          npm run test
+          .\mvnw clean package
+          .\mvnw test
         fi
