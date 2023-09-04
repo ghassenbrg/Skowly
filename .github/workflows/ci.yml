@@ -23,7 +23,8 @@ jobs:
     - name: Check for changes in Config Server
       id: check-config-server
       run: |
-        if git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep -q '^config-server/'; then
+        CHANGED_FILES=$(git diff --name-only ${{ github.event.before.sha }} ${{ github.sha }})
+        if echo "$CHANGED_FILES" | grep -q '^config-server/'; then
           echo "Changes detected in Config Server. Running the job."
           echo "::set-output name=run_job::true"
         else
@@ -58,7 +59,8 @@ jobs:
     - name: Check for changes in Eureka Server
       id: check-eureka-server
       run: |
-        if git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep -q '^eureka-server/'; then
+        CHANGED_FILES=$(git diff --name-only ${{ github.event.before.sha }} ${{ github.sha }})
+        if echo "$CHANGED_FILES" | grep -q '^eureka-server/'; then
           echo "Changes detected in Eureka Server. Running the job."
           echo "::set-output name=run_job::true"
         else
@@ -93,7 +95,8 @@ jobs:
     - name: Check for changes in Gateway
       id: check-gateway
       run: |
-        if git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep -q '^gateway/'; then
+        CHANGED_FILES=$(git diff --name-only ${{ github.event.before.sha }} ${{ github.sha }})
+        if echo "$CHANGED_FILES" | grep -q '^gateway/'; then
           echo "Changes detected in Gateway. Running the job."
           echo "::set-output name=run_job::true"
         else
@@ -128,7 +131,8 @@ jobs:
     - name: Check for changes in Skowly Core
       id: check-skowly-core
       run: |
-        if git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep -q '^skowly-core/'; then
+        CHANGED_FILES=$(git diff --name-only ${{ github.event.before.sha }} ${{ github.sha }})
+        if echo "$CHANGED_FILES" | grep -q '^skowly-core/'; then
           echo "Changes detected in Skowly Core. Running the job."
           echo "::set-output name=run_job::true"
         else
@@ -163,8 +167,21 @@ jobs:
     - name: Check for changes in Skowly UI
       id: check-skowly-ui
       run: |
-        if git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep -q '^skowly-ui/'; then
+        CHANGED_FILES=$(git diff --name-only ${{ github.event.before.sha }} ${{ github.sha }})
+        if echo "$CHANGED_FILES" | grep -q '^skowly-ui/'; then
           echo "Changes detected in Skowly UI. Running the job."
           echo "::set-output name=run_job::true"
         else
-          echo "No changes detected in Skowly UI. Skipping the
+          echo "No changes detected in Skowly UI. Skipping the job."
+          echo "::set-output name=run_job::false"
+        fi
+
+    - name: Build and test skowly-ui
+      run: |
+        if [[ "${{ steps.check-skowly-ui.outputs.run_job }}" == "true" ]]; then
+          cd skowly-ui
+          npm install
+          npm run test
+        else
+          echo "Job skipped."
+        fi
