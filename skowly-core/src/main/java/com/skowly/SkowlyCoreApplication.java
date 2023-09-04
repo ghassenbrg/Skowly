@@ -9,7 +9,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 public class SkowlyCoreApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SkowlyCoreApplication.class, args);
+		SpringApplication.run(SkowlyCoreApplication.class, args); 
 	}
 
 }
