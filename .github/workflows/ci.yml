@@ -8,32 +8,13 @@ on:
 jobs:
   build:
     runs-on: windows-latest # Use a Windows runner
-    
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: config-server Build and test
+    - name: Build and test
       run: |
-        .\build.bat config-server
+        .\build.bat -skipDocker all
       shell: powershell # Use PowerShell to run the batch script
 
-    - name: eureka-server Build and test
-      run: |
-        .\build.bat eureka-server
-      shell: powershell # Use PowerShell to run the batch script
-    
-    - name: gateway Build and test
-      run: |
-        .\build.bat gateway
-      shell: powershell # Use PowerShell to run the batch script      
-
-    - name: skowly-core Build and test
-      run: |
-        .\build.bat skowly-core
-      shell: powershell # Use PowerShell to run the batch script
-      
-    - name: skowly-ui Build and test
-      run: |
-        .\build.bat skowly-ui
-      shell: powershell # Use PowerShell to run the batch script
