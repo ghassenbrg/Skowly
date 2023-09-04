@@ -24,15 +24,6 @@ jobs:
         name: test-results
         path: path/to/test/reports  # Update with your actual test reports path
 
-    - name: Upload Docker images
-      if: github.event_name == 'push'
-      run: |
-        docker push your-image:eureka-server
-        docker push your-image:gateway
-        docker push your-image:config-server
-        docker push your-image:skowly-core
-        docker push your-image:skowly-ui
-
     - name: Deploy to Docker Compose
       if: github.event_name == 'push'
       run: |
