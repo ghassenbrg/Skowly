@@ -11,8 +11,8 @@ jobs:
     runs-on: windows-latest
 
     if: |
-      github.event.commits[0].added | contains('config-server/') ||
-      github.event.commits[0].modified | contains('config-server/')
+      contains(github.event.commits[0].added, 'config-server/') || 
+      contains(github.event.commits[0].modified, 'config-server/')
 
     steps:
     - name: Checkout code
@@ -35,8 +35,8 @@ jobs:
     runs-on: windows-latest
 
     if: |
-      github.event.commits[0].added | contains('eureka-server/') ||
-      github.event.commits[0].modified | contains('eureka-server/')
+      contains(github.event.commits[0].added, 'eureka-server/') || 
+      contains(github.event.commits[0].modified, 'eureka-server/')
 
     steps:
     - name: Checkout code
@@ -59,8 +59,8 @@ jobs:
     runs-on: windows-latest
 
     if: |
-      github.event.commits[0].added | contains('gateway/') ||
-      github.event.commits[0].modified | contains('gateway/')
+      contains(github.event.commits[0].added, 'gateway/') || 
+      contains(github.event.commits[0].modified, 'gateway/')
 
     steps:
     - name: Checkout code
@@ -83,8 +83,8 @@ jobs:
     runs-on: windows-latest
 
     if: |
-      github.event.commits[0].added | contains('skowly-core/') ||
-      github.event.commits[0].modified | contains('skowly-core/')
+      contains(github.event.commits[0].added, 'skowly-core/') || 
+      contains(github.event.commits[0].modified, 'skowly-core/')
 
     steps:
     - name: Checkout code
@@ -107,8 +107,8 @@ jobs:
     runs-on: windows-latest
 
     if: |
-      github.event.commits[0].added | contains('skowly-ui/') ||
-      github.event.commits[0].modified | contains('skowly-ui/')
+      contains(github.event.commits[0].added, 'skowly-ui/') || 
+      contains(github.event.commits[0].modified, 'skowly-ui/')
 
     steps:
     - name: Checkout code
