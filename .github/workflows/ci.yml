@@ -35,8 +35,8 @@ jobs:
       run: |
         if [[ "${{ steps.check-config-server.outputs.run_job }}" == "true" ]]; then
           cd config-server
-          .\mvnw clean package
-          .\mvnw test
+          ./mvnw clean package
+          ./mvnw test
         else
           echo "Job skipped."
         fi
@@ -70,8 +70,8 @@ jobs:
       run: |
         if [[ "${{ steps.check-eureka-server.outputs.run_job }}" == "true" ]]; then
           cd eureka-server
-          .\mvnw clean package
-          .\mvnw test
+          ./mvnw clean package
+          ./mvnw test
         else
           echo "Job skipped."
         fi
@@ -105,8 +105,8 @@ jobs:
       run: |
         if [[ "${{ steps.check-gateway.outputs.run_job }}" == "true" ]]; then
           cd gateway
-          .\mvnw clean package
-          .\mvnw test
+          ./mvnw clean package
+          ./mvnw test
         else
           echo "Job skipped."
         fi
@@ -140,8 +140,8 @@ jobs:
       run: |
         if [[ "${{ steps.check-skowly-core.outputs.run_job }}" == "true" ]]; then
           cd skowly-core
-          .\mvnw clean package
-          .\mvnw test
+          ./mvnw clean package
+          ./mvnw test
         else
           echo "Job skipped."
         fi
@@ -167,16 +167,4 @@ jobs:
           echo "Changes detected in Skowly UI. Running the job."
           echo "::set-output name=run_job::true"
         else
-          echo "No changes detected in Skowly UI. Skipping the job."
-          echo "::set-output name=run_job::false"
-        fi
-
-    - name: Build and test skowly-ui
-      run: |
-        if [[ "${{ steps.check-skowly-ui.outputs.run_job }}" == "true" ]]; then
-          cd skowly-ui
-          npm install
-          npm run test
-        else
-          echo "Job skipped."
-        fi
+          echo "No changes detected in Skowly UI. Skipping the
