@@ -13,7 +13,27 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Build and test
+    - name: config-server Build and test
       run: |
-        .\build.bat -skipDocker all
+        .\build.bat config-server
+      shell: powershell # Use PowerShell to run the batch script
+
+    - name: eureka-server Build and test
+      run: |
+        .\build.bat eureka-server
+      shell: powershell # Use PowerShell to run the batch script
+    
+    - name: gateway Build and test
+      run: |
+        .\build.bat gateway
+      shell: powershell # Use PowerShell to run the batch script      
+
+    - name: skowly-core Build and test
+      run: |
+        .\build.bat skowly-core
+      shell: powershell # Use PowerShell to run the batch script
+      
+    - name: skowly-ui Build and test
+      run: |
+        .\build.bat skowly-ui
       shell: powershell # Use PowerShell to run the batch script
