@@ -7,7 +7,7 @@ on:
 
 jobs:
   build-and-test:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
     - name: Checkout code
@@ -21,35 +21,35 @@ jobs:
     - name: Build and test config-server
       run: |
         cd config-server
-        ./mvnw clean package
-        ./mvnw test
+        .\mvnw clean package
+        .\mvnw test
 
     - name: Build and test eureka-server
       run: |
         cd eureka-server
-        ./mvnw clean package
-        ./mvnw test
+        .\mvnw clean package
+        .\mvnw test
 
     - name: Build and test gateway
       run: |
         cd gateway
-        ./mvnw clean package
-        ./mvnw test
+        .\mvnw clean package
+        .\mvnw test
 
     - name: Build and test skowly-core
       run: |
         cd skowly-core
-        ./mvnw clean package
-        ./mvnw test
+        .\mvnw clean package
+        .\mvnw test
 
     - name: Build and test skowly-ui
       run: |
         cd skowly-ui
         npm install
-        ng test
+        npm run test
 
   code-analysis:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
     - name: Checkout code
