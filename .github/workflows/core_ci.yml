@@ -22,7 +22,7 @@ jobs:
       run: cd skowly-core && mvn clean verify install
     - name: Publish Artifact
       if: success()
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: skowly-core-artifacts
         path: skowly-core/target/*.jar
@@ -38,10 +38,54 @@ jobs:
         cache: maven
 
     - name: Run maven test
-      run: cd eureka-server && mvn clean verify
+      run: cd eureka-server && mvn clean verify install
     - name: Publish Artifact
       if: success()
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: eureka-server-artifacts
         path: eureka-server/target/*.jar
+
+
+
+
+
+  gateway:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: maven
+
+    - name: Run maven test
+      run: cd gateway && mvn clean verify install
+    - name: Publish Artifact
+      if: success()
+      uses: actions/upload-artifact@v3
+      with:
+        name: gateway-artifacts
+        path: gateway/target/*.jar
+
+  config-server:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: maven
+
+    - name: Run maven test
+      run: cd config-server && mvn clean verify install
+    - name: Publish Artifact
+      if: success()
+      uses: actions/upload-artifact@v3
+      with:
+        name: config-server-artifacts
+        path: config-server/target/*.jar
