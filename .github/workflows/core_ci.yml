@@ -19,7 +19,13 @@ jobs:
         cache: maven
 
     - name: run maven test
-      run: cd skowly-core && mvn clean verify
+      run: cd skowly-core && mvn clean verify install
+    - name: Publish Artifact
+      if: success()
+      uses: actions/upload-artifact@v2
+      with:
+        name: skowly-core-artifacts
+        path: skowly-core/target/*.jar
   eureka-server:
     runs-on: ubuntu-latest
     steps:
@@ -33,3 +39,9 @@ jobs:
 
     - name: Run maven test
       run: cd eureka-server && mvn clean verify
+    - name: Publish Artifact
+      if: success()
+      uses: actions/upload-artifact@v2
+      with:
+        name: eureka-server-artifacts
+        path: eureka-server/target/*.jar
