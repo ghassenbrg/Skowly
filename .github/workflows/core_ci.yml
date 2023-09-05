@@ -8,7 +8,6 @@ on:
 
 jobs:
   skowly-core:
-    needs: eureka-server
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -53,7 +52,6 @@ jobs:
 
   gateway:
     runs-on: ubuntu-latest
-    needs: skowly-core
     steps:
     - uses: actions/checkout@v3
     - name: Set up JDK 17
@@ -74,7 +72,6 @@ jobs:
 
   config-server:
     runs-on: ubuntu-latest
-    needs: skowly-core
     steps:
     - uses: actions/checkout@v3
     - name: Set up JDK 17
