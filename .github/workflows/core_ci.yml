@@ -1,4 +1,4 @@
-name: Build and Test Skowly Core
+name: Skowly Core
  
 on:
   push:
