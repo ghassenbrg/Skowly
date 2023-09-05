@@ -2,7 +2,7 @@ version: "3.7"
 services:
 
   eureka-server:
-    image: eureka-server:1.0.0-SNAPSHOT
+    image: skowly/eureka-server:1.0.0-SNAPSHOT
     container_name: eureka-server
     ports:
       - "${eureka_external_port}:${eureka_internal_port}"
@@ -17,7 +17,7 @@ services:
       retries: 5
 
   config-server:
-    image: config-server:1.0.0-SNAPSHOT
+    image: skowly/config-server:1.0.0-SNAPSHOT
     container_name: config-server
     hostname: config-server
     ports:
@@ -40,7 +40,7 @@ services:
       retries: 5
 
   keycloak:
-    image: jboss/keycloak:15.0.2
+    image: skowly/keycloak:15.0.2
     container_name: keycloak
     command: ["-Djboss.socket.binding.port-offset=${keycloak_port_offset}"]
     ports:
@@ -64,7 +64,7 @@ services:
       retries: 5
 
   gateway:
-    image: gateway:1.0.0-SNAPSHOT
+    image: skowly/gateway:1.0.0-SNAPSHOT
     container_name: gateway
     ports:
       - "${gateway_external_port}:${gateway_internal_port}"
@@ -87,7 +87,7 @@ services:
       retries: 5
 
   skowly-ui:
-    image: skowly-ui:1.0.0-SNAPSHOT
+    image: skowly/skowly-ui:1.0.0-SNAPSHOT
     container_name: skowly-ui
     ports:
       - "${skowly_ui_external_port}:80"
@@ -105,7 +105,7 @@ services:
       retries: 5
 
   skowly-core:
-    image: skowly-core:1.0.0-SNAPSHOT
+    image: skowly/skowly-core:1.0.0-SNAPSHOT
     container_name: skowly-core
     ports:
       - "${skowly_core_external_port}:${skowly_core_internal_port}"
