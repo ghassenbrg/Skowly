@@ -72,11 +72,6 @@
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
-			<groupId>net.serenity-bdd.maven.plugins</groupId>
-			<artifactId>serenity-maven-plugin</artifactId>
-			<version>4.0.1</version>
-		</dependency>
 	</dependencies>
 	<dependencyManagement>
 		<dependencies>
@@ -104,24 +99,6 @@
 					</excludes>
 				</configuration>
 			</plugin>
-			<plugin>
-				<groupId>net.serenity-bdd.maven.plugins</groupId>
-				<artifactId>serenity-maven-plugin</artifactId>
-				<version>4.0.1</version> <!-- Use the appropriate version -->
-				<executions>
-					<execution>
-						<id>serenity-reports</id>
-						<phase>post-integration-test</phase>
-						<goals>
-							<goal>aggregate</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<outputDirectory>${project.build.directory}/site/serenity</outputDirectory>
-				</configuration>
-			</plugin>
-
 		</plugins>
 	</build>
 
