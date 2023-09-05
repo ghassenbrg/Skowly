@@ -7,10 +7,8 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
-
+  skowly-core:
     runs-on: ubuntu-latest
- 
     steps:
     - uses: actions/checkout@v3
     - name: Set up JDK 17
@@ -20,5 +18,18 @@ jobs:
         distribution: 'temurin'
         cache: maven
 
-    - name: Build with Maven
+    - name: run maven test
       run: cd skowly-core && mvn clean verify
+  eureka-server:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: maven
+
+    - name: Run maven test
+      run: cd eureka-server && mvn clean verify
