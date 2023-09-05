@@ -1,20 +1,31 @@
-name: Skowly CI
-
+name: Build and Test Skowly Core
+ 
 on:
   push:
-    branches:
-      - main
-
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+ 
 jobs:
   build:
-    runs-on: windows-latest # Use a Windows runner
-
+ 
+    runs-on: ubuntu-latest
+ 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
-    - name: Build and test
-      run: |
-        .\build.bat -skipDocker all
-      shell: powershell # Use PowerShell to run the batch script
-
+    - uses: actions/checkout@v3
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: maven
+    
+    - name: Build with Maven
+      run: cd skowly-core && mvn clean verify
+ 
+    - name: Test Report
+      uses: actions/upload-artifact@v3
+      if: success() || failure()
+      with:
+          name: SpringBoot Report               # Name of the folder
+          path: target/site/serenity/           # Path to test results
