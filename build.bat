@@ -23,7 +23,7 @@ if "!PROJECT!"=="all" (
 if !SKIP_DOCKER!==0 (
     if "!PROJECT!"=="all" (
         (
-            mvn clean install
+            mvn clean install -X
             docker build -t eureka-server:1.0.0-SNAPSHOT -f .\eureka-server\Dockerfile .\eureka-server
             docker build -t gateway:1.0.0-SNAPSHOT -f .\gateway\Dockerfile .\gateway
             docker build -t config-server:1.0.0-SNAPSHOT -f .\config-server\Dockerfile .\config-server
@@ -33,7 +33,7 @@ if !SKIP_DOCKER!==0 (
     ) else (
         if not "!PROJECT!"=="skowly-ui" (
             pushd .\!PROJECT!
-            mvn clean install
+            mvn clean install -X
             popd
         )
         docker build -t %PROJECT%:1.0.0-SNAPSHOT -f .\%PROJECT%\Dockerfile .\%PROJECT%
@@ -41,14 +41,14 @@ if !SKIP_DOCKER!==0 (
 ) else (
     if "!PROJECT!"=="all" (
         (
-            mvn clean install -DskipTests
+            mvn clean install -X -DskipTests
             echo Skipping docker builds...
         )
     ) else (
         if not "!PROJECT!"=="skowly-ui" (
             pushd .\!PROJECT!
             (
-                mvn clean install -DskipTests
+                mvn clean install -X -DskipTests
                 echo Skipping docker builds...
             )
             popd
