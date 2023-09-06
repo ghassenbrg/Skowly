@@ -8,6 +8,7 @@ import { RequestInterceptor } from './core/interceptors/request.interceptor';
 import { PublicPageComponent } from './public-page/public-page.component';
 import { PrivatePageComponent } from './private-page/private-page.component';
 import { UnauthorizedPageComponent } from './unauthorized-page/unauthorized-page.component';
+import { PlateformManagementModule } from './features/plateform-management/plateform-management.module';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { UnauthorizedPageComponent } from './unauthorized-page/unauthorized-page
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    PlateformManagementModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true },

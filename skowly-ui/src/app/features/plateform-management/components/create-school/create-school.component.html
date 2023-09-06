@@ -1,0 +1,91 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <form>
+        <div class="mb-3">
+          <label for="name" class="form-label">Name</label>
+          <input id="name" type="text" class="form-control" [(ngModel)]="newSchool.name" />
+        </div>
+
+        <div class="mb-3">
+          <label for="description" class="form-label">Description</label>
+          <input id="description" type="text" class="form-control" [(ngModel)]="newSchool.description" />
+        </div>
+
+        <div class="mb-3">
+          <label for="address" class="form-label">Address</label>
+          <input id="address" type="text" class="form-control" [(ngModel)]="newSchool.address.streetAddress" />
+        </div>
+
+        <div class="mb-3">
+          <label for="phoneNumber" class="form-label">Phone Number</label>
+          <input id="phoneNumber" type="text" class="form-control" [(ngModel)]="newSchool.phoneNumber" />
+        </div>
+
+        <div class="mb-3">
+          <label for="website" class="form-label">Website</label>
+          <input id="website" type="text" class="form-control" [(ngModel)]="newSchool.website" />
+        </div>
+
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input id="email" type="text" class="form-control" [(ngModel)]="newSchool.email" />
+        </div>
+
+        <div class="mb-3">
+          <label for="principalName" class="form-label">Principal Name</label>
+          <input id="principalName" type="text" class="form-control" [(ngModel)]="newSchool.principal.principalName" />
+        </div>
+
+        <div class="mb-3">
+          <label for="totalStudents" class="form-label">Total Students</label>
+          <input id="totalStudents" type="number" class="form-control" [(ngModel)]="newSchool.totalStudents" />
+        </div>
+
+        <div class="mb-3">
+          <label for="totalTeachers" class="form-label">Total Teachers</label>
+          <input id="totalTeachers" type="number" class="form-control" [(ngModel)]="newSchool.totalTeachers" />
+        </div>
+
+        <div class="mb-3">
+          <label for="mapsPosition" class="form-label">Maps Position</label>
+          <input id="mapsPosition" type="text" class="form-control" [(ngModel)]="newSchool.mapsPosition" />
+        </div>
+
+        <div class="mb-3">
+          <label for="foundingDate" class="form-label">Founding Date</label>
+          <input id="foundingDate" type="date" class="form-control" [(ngModel)]="newSchool.foundingDate" />
+        </div>
+
+        <div class="mb-3">
+          <label for="accreditation" class="form-label">Accreditation</label>
+          <input id="accreditation" type="text" class="form-control" [(ngModel)]="newSchool.accreditation" />
+        </div>
+
+        <div class="mb-3">
+          <label for="facilities" class="form-label">Facilities</label>
+          <input id="facilities" type="text" class="form-control" [(ngModel)]="newSchool.facilities" />
+        </div>
+
+        <div class="mb-3">
+          <label for="extracurricularActivities" class="form-label">Extracurricular Activities</label>
+          <input id="extracurricularActivities" type="text" class="form-control" [(ngModel)]="newSchool.extracurricularActivities" />
+        </div>
+
+        <div class="mb-3">
+          <label for="admissionProcess" class="form-label">Admission Process</label>
+          <input id="admissionProcess" type="text" class="form-control" [(ngModel)]="newSchool.admissionProcess" />
+        </div>
+
+        <div class="mb-3">
+          <label for="users" class="form-label">Users</label>
+          <input id="users" type="text" class="form-control" [(ngModel)]="newSchool.users" />
+        </div>
+
+        <div class="mb-3">
+          <button type="button" class="btn btn-success" (click)="createSchool()">Create</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

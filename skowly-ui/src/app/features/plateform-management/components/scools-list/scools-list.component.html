@@ -1,0 +1,41 @@
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Address</th>
+        <th>Phone Number</th>
+        <th>Website</th>
+        <th>Email</th>
+        <th>Principal</th>
+        <th>Total Students</th>
+        <th>Total Teachers</th>
+        <th>Maps Position</th>
+        <th>Founding Date</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let school of schools">
+        <td>{{ school?.name }}</td>
+        <td>{{ school?.address?.streetAddress }}, {{ school?.address?.city }}, {{ school?.address?.state }}, {{ school?.address?.country }}</td>
+        <td>{{ school?.phoneNumber }}</td>
+        <td><a [href]="school?.website" target="_blank">{{ school?.website }}</a></td>
+        <td>{{ school?.email }}</td>
+        <td>{{ school?.principal?.principalName }}</td>
+        <td>{{ school?.totalStudents }}</td>
+        <td>{{ school?.totalTeachers }}</td>
+        <td>{{ school?.mapsPosition }}</td>
+        <td>{{ school?.foundingDate | date }}</td>
+        <td>
+          <button class="btn btn-primary" (click)="editSchool(school)">Edit</button>
+          <button class="btn btn-danger" (click)="deleteSchool(school)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<a [routerLink]="['/platform-management/create-school']">
+  Create school
+</a>
