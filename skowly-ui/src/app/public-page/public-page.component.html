@@ -324,19 +324,19 @@
         </svg>
       </a>
       <a style="color: white; margin-right: 20px; cursor: pointer;" [routerLink]="['/private-page']">
-        Private Page
+        <i class="fa-solid fa-key"></i> Private Page
       </a>
       <a style="color: white; margin-right: 20px; cursor: pointer;" [routerLink]="['/platform-management/schools']">
-        Plateform Management
+        <i class="fa-solid fa-school"></i> Plateform Management
       </a>
       <a title="wscall" style="color: white; margin-right: 20px; cursor: pointer;" (click)="callHello()">
-        WS Call
+        <i class="fa-solid fa-door-open"></i> Hello
       </a>
       <a *ngIf="keycloak.authenticated" style="color: white; margin-right: 20px; cursor: pointer;" (click)="logout()">
-        LogOut
+        <i class="fa-solid fa-right-from-bracket"></i> LogOut
       </a>
       <a *ngIf="!keycloak.authenticated" style="color: white; margin-right: 20px; cursor: pointer;" (click)="login()">
-        LogIn
+        <i class="fa-solid fa-user-lock"></i> LogIn
       </a>
   </div>
   
