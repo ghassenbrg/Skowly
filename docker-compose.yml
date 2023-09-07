@@ -90,7 +90,7 @@ services:
     image: skowly/skowly-ui:1.0.0-SNAPSHOT
     container_name: skowly-ui
     ports:
-      - "${skowly_ui_external_port}:80"
+      - "80:80"
     networks:
       - skowly-network
     depends_on:
@@ -115,8 +115,8 @@ services:
       SERVER_PORT: ${skowly_core_internal_port}
       EUREKA_SERVER_URL: http://eureka-server:${eureka_internal_port}
       CONFIG_SERVER_URL: http://config-server:${config_server_internal_port}
-      KEYCLOAK_ISSUER_URI: http://localhost:${keycloak_internal_port}/auth/realms/${keycloak_realm}
-      KEYCLOAK_JWK_SET_URI: http://keycloak:${keycloak_internal_port}/auth/realms/${keycloak_realm}/protocol/openid-connect/certs
+      KEYCLOAK_ISSUER_URI: http://localhost/auth/realms/${keycloak_realm}
+      KEYCLOAK_JWK_SET_URI: http://skowly-ui:80/auth/realms/${keycloak_realm}/protocol/openid-connect/certs
       DB_URL: jdbc:postgresql://db-skowly-core:5432/${db_skowly_core_db}
       DB_USER: ${db_skowly_core_user}
       DB_PASSWORD: ${db_skowly_core_password}
