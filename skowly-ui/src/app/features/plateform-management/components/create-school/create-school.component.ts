@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { Router } from '@angular/router'; // Import Router for navigation
 import { SchoolService } from '../../services/school-service.service';
-import { School } from 'src/app/features/model/school.model';
+import { School } from 'src/app/core/model/school.model';
 
 @Component({
   selector: 'app-create-school',
