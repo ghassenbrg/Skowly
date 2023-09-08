@@ -23,6 +23,7 @@ public class SecurityConfig {
 		httpSecurity
 		.authorizeHttpRequests(registry -> 
 		registry.requestMatchers("/actuator/**").permitAll()
+				.requestMatchers("/apidoc/**").permitAll()
 				.anyRequest().authenticated())
 				.oauth2ResourceServer(oauth2Configurer -> oauth2Configurer
 						.jwt(jwtConfigurer -> jwtConfigurer.jwtAuthenticationConverter(jwt -> {
