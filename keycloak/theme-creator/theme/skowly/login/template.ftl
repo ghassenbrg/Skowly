@@ -21,7 +21,7 @@
   <#assign cardHeader>
     <@logo.kw>
       <img class="skowly-logo" style="width: 80% !important; margin: auto;" 
-      src="${url.resourcesPath}/img/skowly-logo.svg" alt="Skowly">
+      src="${url.resourcesPath}/img/skowly-logo.png" alt="Skowly">
     </@logo.kw>
     <#if !(auth?has_content && auth.showUsername() && !auth.showResetCredentials())>
       <@heading.kw>
