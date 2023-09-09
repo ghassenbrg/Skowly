@@ -7,25 +7,6 @@ on:
     branches: [ "main" ]
 
 jobs:
-  increment-version:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Increment Version and Commit
-        run: |
-          # Increment the version in Maven POM files using the Versions Maven Plugin
-          mvn versions:set -DnewVersion=increment
-
-          # Commit the changes
-          git config user.name "dhiasaadlaui"
-          git config user.email "dhiasaadlaui@gmail.com"
-          git commit -am "Increment version"
-
-      - name: Push changes
-        run: git push origin main -u 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
   skowly-core:
     needs: increment-version
     runs-on: ubuntu-latest
