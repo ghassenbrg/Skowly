@@ -5,7 +5,27 @@
 
 version: 2
 updates:
-  - package-ecosystem: "" # See documentation for possible values
-    directory: "/" # Location of package manifests
+  - package-ecosystem: "maven"
+    directory: "/config-server"
     schedule:
-      interval: "weekly"
+      interval: "daily"
+  - package-ecosystem: "maven"
+    directory: "/eureka-server"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "maven"
+    directory: "/gateway"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "maven"
+    directory: "/skowly-core"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "npm"
+    directory: "/skowly-ui"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "npm"
+    directory: "/keycloak/theme-creator"
+    schedule:
+      interval: "daily"
