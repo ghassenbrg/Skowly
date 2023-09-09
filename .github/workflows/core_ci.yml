@@ -8,7 +8,6 @@ on:
 
 jobs:
   skowly-core:
-    needs: increment-version
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -28,7 +27,6 @@ jobs:
         name: skowly-core-artifacts
         path: skowly-core/target/*.jar
   eureka-server:
-    needs: increment-version
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -48,7 +46,6 @@ jobs:
         name: eureka-server-artifacts
         path: eureka-server/target/*.jar
   gateway:
-    needs: increment-version
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -69,7 +66,6 @@ jobs:
         path: gateway/target/*.jar
 
   config-server:
-    needs: increment-version
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
