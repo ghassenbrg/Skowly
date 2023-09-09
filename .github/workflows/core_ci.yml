@@ -1,5 +1,5 @@
-name: Skowly Core
- 
+name: Skowly full test and build
+
 on:
   push:
     branches: [ "main" ]
@@ -18,14 +18,15 @@ jobs:
         distribution: 'temurin'
         cache: maven
 
-    - name: run maven test
+    - name: Run maven test for Skowly Core
       run: cd skowly-core && mvn clean verify install
-    - name: Publish Artifact
+    - name: Publish Skowly Core Artifact
       if: success()
       uses: actions/upload-artifact@v3
       with:
         name: skowly-core-artifacts
         path: skowly-core/target/*.jar
+
   eureka-server:
     runs-on: ubuntu-latest
     steps:
@@ -37,14 +38,15 @@ jobs:
         distribution: 'temurin'
         cache: maven
 
-    - name: Run maven test
+    - name: Run maven test for Eureka Server
       run: cd eureka-server && mvn clean verify install
-    - name: Publish Artifact
+    - name: Publish Eureka Server Artifact
       if: success()
       uses: actions/upload-artifact@v3
       with:
         name: eureka-server-artifacts
         path: eureka-server/target/*.jar
+
   gateway:
     runs-on: ubuntu-latest
     steps:
@@ -56,9 +58,9 @@ jobs:
         distribution: 'temurin'
         cache: maven
 
-    - name: Run maven test
+    - name: Run maven test for Gateway
       run: cd gateway && mvn clean verify install
-    - name: Publish Artifact
+    - name: Publish Gateway Artifact
       if: success()
       uses: actions/upload-artifact@v3
       with:
@@ -76,11 +78,33 @@ jobs:
         distribution: 'temurin'
         cache: maven
 
-    - name: Run maven test
+    - name: Run maven test for Config Server
       run: cd config-server && mvn clean verify install
-    - name: Publish Artifact
+    - name: Publish Config Server Artifact
       if: success()
       uses: actions/upload-artifact@v3
       with:
         name: config-server-artifacts
         path: config-server/target/*.jar
+
+  skowly-ui:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+    - name: Install Angular CLI
+      run: npm install -g @angular/cli
+    - name: Install dependencies and run tests for Skowly UI
+      run: |
+        cd skowly-ui
+        npm install
+        ng test --watch=false --browsers=ChromeHeadless
+    - name: Publish Skowly UI Artifact
+      if: success()
+      uses: actions/upload-artifact@v3
+      with:
+        name: skowly-ui-artifacts
+        path: skowly-ui/dist/*
