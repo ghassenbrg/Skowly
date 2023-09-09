@@ -1,0 +1,29 @@
+name: Build and Test images
+on:
+  push:
+    branches:
+      - main  # Change this to your main branch name
+
+jobs:
+  build:
+    runs-on: windows-latest  # Use a Windows runner
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Run build.bat
+      shell: cmd
+      run: |
+        .\build.bat
+        if %ERRORLEVEL% NEQ 0 exit 1  # Exit with an error if build.bat fails
+
+    - name: Clean Up Docker Image
+      run: |
+        docker rmi skowly/eureka-server
+        docker rmi skowly/gateway
+        docker rmi skowly/config-server
+        docker rmi skowly/skowly-core
+        docker rmi skowly/skowly-ui
+        skowly/keycloak
+      continue-on-error: false  
