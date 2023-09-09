@@ -25,7 +25,7 @@ jobs:
           git commit -am "Increment version"
 
       - name: Push changes
-        run: git push origin main -u ${{ secrets.GITHUB_TOKEN }}
+        run: git push origin main -u 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
   skowly-core:
     needs: increment-version
     runs-on: ubuntu-latest
