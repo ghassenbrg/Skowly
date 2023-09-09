@@ -1,4 +1,4 @@
-package com.skowly.core.config;
+package com.skowly.core.security;
 
 import java.util.Collection;
 import java.util.Map;
