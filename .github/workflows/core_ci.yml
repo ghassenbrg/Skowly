@@ -102,6 +102,7 @@ jobs:
         cd skowly-ui
         npm install
         ng test --watch=false --browsers=ChromeHeadless
+        ng build --configuration "production"
     - name: Publish Skowly UI Artifact
       if: success()
       uses: actions/upload-artifact@v3
