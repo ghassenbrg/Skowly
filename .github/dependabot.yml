@@ -25,7 +25,3 @@ updates:
     directory: "/skowly-ui"
     schedule:
       interval: "daily"
-  - package-ecosystem: "npm"
-    directory: "/keycloak/theme-creator"
-    schedule:
-      interval: "daily"
