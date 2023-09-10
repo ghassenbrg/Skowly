@@ -17,7 +17,7 @@ export class PrivatePageComponent {
     this.randomUserName = 'Skowly_' + this.getRandomInt(1000);
     // Connect to WebSocket server
     this.webSocketService.connect(
-      'http://localhost:8081/api/core/ws',
+      '/api/core/ws',
       '/topic/messages'
     );
   }
