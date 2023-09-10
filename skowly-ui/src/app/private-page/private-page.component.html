@@ -1,13 +1,17 @@
+<div>
+  <input [(ngModel)]="message" placeholder="Enter message">
+  <button (click)="send()">Send Message</button>
+</div>
 
-<a style="color: blueviolet; margin-right: 20px; cursor: pointer;" [routerLink]="['/']">
-  Home
-</a>
-<a title="wscall" style="color: blueviolet; margin-right: 20px; cursor: pointer;" (click)="callHello()">
-    WS Call
-  </a>
-  <a title="Logout" style="color: blueviolet; margin-right: 20px; cursor: pointer;" (click)="logout()">
-    LogOut
-  </a>
-
-<p>private-page works!</p>
-<h1> {{hello}} </h1>
+<div>
+  <h3>Received Messages:</h3>
+  <p>Your username is {{ randomUserName }}</p>
+  <ul>
+    <li *ngFor="let msg of webSocketService.msg">
+      <span class="username" [ngClass]="randomUserName == msg.username ? 'current-user' : 'other-user'">
+        {{ randomUserName == msg.username ? 'You' : msg.username }} :: 
+      </span>
+      <span>{{ msg.text }}</span>
+    </li>
+  </ul>
+  

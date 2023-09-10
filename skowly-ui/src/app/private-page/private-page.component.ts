@@ -1,41 +1,43 @@
-import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { keycloak } from 'src/main';
-import { AuthenticationService } from '../core/auth/auth.service';
+import { Subscription } from 'rxjs';
+import { WebSocketService } from '../core/services/Web-socket.service';
 
 @Component({
   selector: 'app-private-page',
   templateUrl: './private-page.component.html',
-  styleUrls: ['./private-page.component.scss']
+  styleUrls: ['./private-page.component.scss'],
 })
 export class PrivatePageComponent {
+  private subscription: Subscription = new Subscription();
+  public message: string = '';
+  randomUserName: string = '';
+  constructor(public webSocketService: WebSocketService) {}
 
-  title = 'skowly-ui';
-  keycloak = keycloak;
-  hello: string = '';
-
-  constructor(private http: HttpClient, private auth: AuthenticationService) {}
-
-  logout() {
-    this.auth.logout();
+  ngOnInit(): void {
+    this.randomUserName = 'Skowly_' + this.getRandomInt(1000);
+    // Connect to WebSocket server
+    this.webSocketService.connect(
+      'http://localhost:8081/api/core/ws',
+      '/topic/messages'
+    );
   }
 
-  login() {
-    this.auth.login();
+  send(): void {
+    // Send a message to the '/app/send' destination
+    let payload: any = {
+      username: this.randomUserName,
+      text: this.message
+    };
+
+    this.webSocketService.sendMessage('/app/send', payload);
+    this.message = '';
   }
 
-  callHello() {
-    this.http.get('/api/core/hello', { responseType: 'text' })
-      .subscribe(
-        data => {
-          this.hello = data;
-          console.log(data);
-        },
-        error => {
-          console.log(error);
-        }
-      );
-
+  private getRandomInt(max: number): number {
+    return Math.floor(Math.random() * Math.floor(max));
   }
 
+  ngOnDestroy(): void {
+    this.webSocketService.disconnect();
+  }
 }
