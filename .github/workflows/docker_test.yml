@@ -6,7 +6,7 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest  # Use a Windows runner
+    runs-on: ubuntu-latest  # Use a Windows runner
 
     steps:
     - uses: actions/checkout@v3
@@ -16,10 +16,15 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
-    - name: Run build.bat
-      shell: cmd
+    - name: Install Wine
       run: |
-        .\build.bat
+        sudo dpkg --add-architecture i386
+        sudo apt-get update
+        sudo apt-get install wine64 wine32
+
+    - name: Run build.bat
+      run: |
+        wine cmd /c build.bat
         if %ERRORLEVEL% NEQ 0 exit 1  # Exit with an error if build.bat fails
 
     - name: Clean Up Docker Image
