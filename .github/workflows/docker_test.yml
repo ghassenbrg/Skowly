@@ -1,0 +1,38 @@
+name: Build and Test images
+on:
+  push:
+    branches:
+      - main  # Change this to your main branch name
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # Use a Windows runner
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: maven
+    - name: Install Wine
+      run: |
+        sudo dpkg --add-architecture i386
+        sudo apt-get update
+        sudo apt-get install wine64 wine32
+
+    - name: Run build.bat
+      run: |
+        wine cmd /c build.bat
+        if %ERRORLEVEL% NEQ 0 exit 1  # Exit with an error if build.bat fails
+
+    - name: Clean Up Docker Image
+      run: |
+        docker rmi skowly/eureka-server
+        docker rmi skowly/gateway
+        docker rmi skowly/config-server
+        docker rmi skowly/skowly-core
+        docker rmi skowly/skowly-ui
+        skowly/keycloak
+      continue-on-error: false  
