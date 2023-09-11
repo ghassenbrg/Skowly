@@ -14,13 +14,6 @@ public class Teacher {
 
 	private String name;
 
-	@ManyToOne
-	private School school;
-
-	@ManyToMany
-	@JoinTable(name = "teacher_courses", joinColumns = @JoinColumn(name = "teacher_id"), inverseJoinColumns = @JoinColumn(name = "course_id"))
-	private List<Course> courses;
-
 	@OneToMany(mappedBy = "teacher")
-	private List<TeacherAssignment> teacherAssignments;
+	private List<CourseAssignment> courseAssignments;
 }

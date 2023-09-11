@@ -1,9 +1,10 @@
 package com.skowly.core.model;
 
+import java.util.List;
+
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.util.List;
 
 @Data
 @Entity
@@ -14,9 +15,10 @@ public class Course {
 
     private String courseName;
 
-    @ManyToMany(mappedBy = "courses")
-    private List<Classroom> classrooms;
+    @ManyToOne
+    private Classroom classroom;
 
-    @ManyToMany(mappedBy = "courses")
-    private List<Teacher> teachers;
+    
+	@OneToMany(mappedBy = "course")
+	private List<CourseAssignment> courseAssignments;
 }

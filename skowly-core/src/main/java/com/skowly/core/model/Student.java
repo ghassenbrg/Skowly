@@ -14,6 +14,6 @@ public class Student {
 	private String name;
 
 	@ManyToOne
-	private Classroom classroom;
+	private ClassGroup classgroup;
 
 }

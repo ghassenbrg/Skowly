@@ -40,10 +40,5 @@ public class School {
 	private String extracurricularActivities; // List of extracurricular activities offered
 	private String admissionProcess; // Information on the admission process
 
-	@OneToMany(mappedBy = "school")
-	private List<Classroom> classrooms;
-
-	@OneToMany(mappedBy = "school")
-	private List<Teacher> teachers;
 
 }

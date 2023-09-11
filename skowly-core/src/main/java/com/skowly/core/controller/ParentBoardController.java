@@ -11,25 +11,25 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.skowly.core.model.TeacherAssignment;
+import com.skowly.core.model.CourseAssignment;
 import com.skowly.core.model.ui.CourseCard;
-import com.skowly.core.service.TeacherAssignementService;
+import com.skowly.core.service.CourseAssignementService;
 
 @RestController
 @RequestMapping("/parent-board")
 public class ParentBoardController {
 
 	@Autowired
-	TeacherAssignementService teacherAssignementService;
+	CourseAssignementService teacherAssignementService;
 
 	@GetMapping("/students/{id}")
 	public ResponseEntity<List<CourseCard>> getCourses(@PathVariable Long id) {
-		List<TeacherAssignment> teacherAssignements = teacherAssignementService.getTeacherAssignementsByStudentId(id);
+		List<CourseAssignment> courseAssignements = teacherAssignementService.getTeacherAssignementsByStudentId(id);
 
-		if (teacherAssignements == null) {
+		if (courseAssignements == null) {
 			return ResponseEntity.ok(new ArrayList<>());
 		}
-		List<CourseCard> courseCards = teacherAssignements.stream().map(assignement -> {
+		List<CourseCard> courseCards = courseAssignements.stream().map(assignement -> {
 			CourseCard couseCard = new CourseCard();
 			couseCard.setTeacherName(assignement.getTeacher().getName());
 			couseCard.setCourseName(assignement.getCourse().getCourseName());

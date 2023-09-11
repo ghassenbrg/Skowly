@@ -1,18 +1,21 @@
 package com.skowly.core.model;
 
-import lombok.Data;
-import jakarta.persistence.*;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import lombok.Data;
 
 @Data
 @Entity
-public class TeacherAssignment {
+public class CourseAssignment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
-    private Classroom classroom;
+    private ClassGroup classGroup;
 
     @ManyToOne
     private Teacher teacher;
