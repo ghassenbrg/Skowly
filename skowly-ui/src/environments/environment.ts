@@ -1,7 +1,9 @@
 export const environment = {
-    production: false,
+  production: false,
 
-    keycloak_url: 'http://localhost/auth',
-    keycloak_realm: 'skowly',
-    keycloak_clientId: 'external-client'
-  };
+  keycloak_url: 'http://localhost/auth',
+  keycloak_realm: 'skowly',
+  keycloak_clientId: 'external-client',
+
+  websocket_url: '/api/core/ws',
+};

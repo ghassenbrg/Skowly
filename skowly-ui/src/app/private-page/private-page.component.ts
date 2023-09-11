@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { WebSocketService } from '../core/services/Web-socket.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-private-page',
@@ -17,7 +18,7 @@ export class PrivatePageComponent {
     this.randomUserName = 'Skowly_' + this.getRandomInt(1000);
     // Connect to WebSocket server
     this.webSocketService.connect(
-      '/api/core/ws',
+      environment.websocket_url,
       '/topic/messages'
     );
   }

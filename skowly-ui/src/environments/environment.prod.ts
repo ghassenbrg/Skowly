@@ -3,5 +3,7 @@ export const environment = {
 
   keycloak_url: '/auth',
   keycloak_realm: 'skowly',
-  keycloak_clientId: 'external-client'
+  keycloak_clientId: 'external-client',
+
+  websocket_url: '/api/core/ws',
 };
