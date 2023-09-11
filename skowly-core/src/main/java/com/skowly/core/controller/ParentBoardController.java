@@ -15,19 +15,19 @@ import com.skowly.core.model.CourseAssignment;
 import com.skowly.core.model.Student;
 import com.skowly.core.model.ui.CourseCard;
 import com.skowly.core.repository.StudentRepository;
-import com.skowly.core.service.CourseAssignementService;
+import com.skowly.core.service.CourseAssignmentService;
 
 @RestController
 @RequestMapping("/parent-board")
 public class ParentBoardController {
 
 	@Autowired
-	CourseAssignementService teacherAssignementService;
+	CourseAssignmentService teacherAssignmentService;
 	@Autowired
 	StudentRepository studentRepository;
 	@GetMapping("/students/{id}/courses")
 	public ResponseEntity<List<CourseCard>> getCourses(@PathVariable Long id) {
-		List<CourseAssignment> courseAssignements = teacherAssignementService.getTeacherAssignementsByStudentId(id);
+		List<CourseAssignment> courseAssignements = teacherAssignmentService.getTeacherAssignementsByStudentId(id);
 
 		if (courseAssignements == null) {
 			return ResponseEntity.ok(new ArrayList<>());

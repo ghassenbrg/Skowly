@@ -22,10 +22,10 @@ import lombok.Data;
 	@ManyToOne
 	private Classroom classroom;
 
-	@OneToMany(mappedBy = "group")
+	@OneToMany(mappedBy = "classGroup")
 	private List<Student> students;
 
-	@OneToMany(mappedBy = "group")
+	@OneToMany(mappedBy = "classGroup")
 	private List<CourseAssignment> courseAssignments;
 	
 }
