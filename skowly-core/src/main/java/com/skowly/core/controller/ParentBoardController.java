@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.skowly.core.model.CourseAssignment;
+import com.skowly.core.model.Student;
 import com.skowly.core.model.ui.CourseCard;
+import com.skowly.core.repository.StudentRepository;
 import com.skowly.core.service.CourseAssignementService;
 
 @RestController
@@ -21,8 +23,9 @@ public class ParentBoardController {
 
 	@Autowired
 	CourseAssignementService teacherAssignementService;
-
-	@GetMapping("/students/{id}")
+	@Autowired
+	StudentRepository studentRepository;
+	@GetMapping("/students/{id}/courses")
 	public ResponseEntity<List<CourseCard>> getCourses(@PathVariable Long id) {
 		List<CourseAssignment> courseAssignements = teacherAssignementService.getTeacherAssignementsByStudentId(id);
 
@@ -37,6 +40,10 @@ public class ParentBoardController {
 		}).collect(Collectors.toList());
 		return ResponseEntity.ok(courseCards);
 
+	}
+	@GetMapping("/students")
+	public ResponseEntity<List<Student>> getStudents(){	
+		return ResponseEntity.ok (studentRepository.findAll());
 	}
 
 }
