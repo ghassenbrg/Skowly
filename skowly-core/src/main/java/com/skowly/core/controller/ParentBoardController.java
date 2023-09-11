@@ -1,0 +1,42 @@
+package com.skowly.core.controller;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.skowly.core.model.TeacherAssignment;
+import com.skowly.core.model.ui.CourseCard;
+import com.skowly.core.service.TeacherAssignementService;
+
+@RestController
+@RequestMapping("/parent-board")
+public class ParentBoardController {
+
+	@Autowired
+	TeacherAssignementService teacherAssignementService;
+
+	@GetMapping("/students/{id}")
+	public ResponseEntity<List<CourseCard>> getCourses(@PathVariable Long id) {
+		List<TeacherAssignment> teacherAssignements = teacherAssignementService.getTeacherAssignementsByStudentId(id);
+
+		if (teacherAssignements == null) {
+			return ResponseEntity.ok(new ArrayList<>());
+		}
+		List<CourseCard> courseCards = teacherAssignements.stream().map(assignement -> {
+			CourseCard couseCard = new CourseCard();
+			couseCard.setTeacherName(assignement.getTeacher().getName());
+			couseCard.setCourseName(assignement.getCourse().getCourseName());
+			return couseCard;
+		}).collect(Collectors.toList());
+		return ResponseEntity.ok(courseCards);
+
+	}
+
+}
