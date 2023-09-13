@@ -2,8 +2,9 @@ package com.skowly.core.initilaizer;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
-import com.skowly.core.model.*;
-import com.skowly.core.repository.*;
+
+import com.skowly.core.domain.model.*;
+import com.skowly.core.domain.repository.*;
 
 @Component
 @ConditionalOnProperty(name = "data.initializer.enabled", havingValue = "true", matchIfMissing = true)
@@ -11,7 +12,7 @@ public class DataInitializer implements CommandLineRunner {
     private final  ClassGroupRepository classGroupRepository;
     private final ClassroomRepository classroomRepository;
     private final CourseRepository courseRepository;
-    private final CourseAssignmentRepository courseAssignmentRepository;
+    private final CourseInstanceRepository courseAssignmentRepository;
     private final StudentRepository studentRepository;
     private final TeacherRepository teacherRepository;
 
@@ -19,7 +20,7 @@ public class DataInitializer implements CommandLineRunner {
             ClassGroupRepository classGroupRepository,
             ClassroomRepository classroomRepository,
             CourseRepository courseRepository,
-            CourseAssignmentRepository courseAssignmentRepository,
+            CourseInstanceRepository courseAssignmentRepository,
             StudentRepository studentRepository,
             TeacherRepository teacherRepository) {
         this.classGroupRepository = classGroupRepository;
@@ -32,6 +33,7 @@ public class DataInitializer implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
+    	/*
     	// Insert data into the database for Classroom
         Classroom classroom = new Classroom();
         classroom.setClassName("2eme");
@@ -99,6 +101,7 @@ public class DataInitializer implements CommandLineRunner {
         courseAssignment2.setTeacher(teacher2);
         courseAssignment2.setCourse(course2);
         courseAssignmentRepository.save(courseAssignment2);
+        */
        
     }
 }

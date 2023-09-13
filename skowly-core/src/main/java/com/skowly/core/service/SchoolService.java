@@ -3,8 +3,8 @@ package com.skowly.core.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.skowly.core.model.school.School;
-import com.skowly.core.repository.SchoolRepository;
+import com.skowly.core.domain.model.School;
+import com.skowly.core.domain.repository.SchoolRepository;
 
 import java.util.List;
 

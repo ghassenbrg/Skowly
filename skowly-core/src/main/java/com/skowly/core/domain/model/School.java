@@ -1,18 +1,25 @@
-package com.skowly.core.model.school;
-
-import jakarta.persistence.*;
-import lombok.Data;
+package com.skowly.core.domain.model;
 
 import java.util.Date;
 import java.util.List;
 
-import com.skowly.core.model.Classroom;
-import com.skowly.core.model.Teacher;
+import com.skowly.core.domain.model.base.BaseEntity;
+
+import jakarta.persistence.Embedded;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
+import lombok.Data;
 
 @Entity
 @Table(name = "schools")
 @Data
-public class School {
+public class School extends BaseEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,5 +47,10 @@ public class School {
 	private String extracurricularActivities; // List of extracurricular activities offered
 	private String admissionProcess; // Information on the admission process
 
+	@OneToMany(mappedBy = "school")
+	private List<Classroom> classrooms;
+
+	@OneToMany(mappedBy = "school")
+	private List<Course> courses;
 
 }

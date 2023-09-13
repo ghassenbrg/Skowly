@@ -1,7 +1,8 @@
-package com.skowly.core.repository;
+package com.skowly.core.domain.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import com.skowly.core.model.Teacher;
+
+import com.skowly.core.domain.model.Teacher;
 
 public interface TeacherRepository extends JpaRepository<Teacher, Long> {
 
