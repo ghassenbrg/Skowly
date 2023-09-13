@@ -15,10 +15,12 @@ import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Entity
 @Table(name = "schools")
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class School extends BaseEntity {
 
 	@Id

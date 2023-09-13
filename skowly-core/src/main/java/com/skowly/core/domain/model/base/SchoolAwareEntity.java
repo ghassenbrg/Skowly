@@ -7,10 +7,12 @@ import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.PrePersist;
 import lombok.AccessLevel;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.Setter;
 
 @Data
 @MappedSuperclass
+@EqualsAndHashCode(callSuper = true)
 public abstract class SchoolAwareEntity extends BaseEntity {
 
 	@Column(updatable = false)

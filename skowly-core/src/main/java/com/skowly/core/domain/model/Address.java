@@ -4,9 +4,12 @@ import com.skowly.core.domain.model.base.SchoolAwareEntity;
 
 import jakarta.persistence.Embeddable;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
+@Data
 @Embeddable
-@Data public class Address extends SchoolAwareEntity {
+@EqualsAndHashCode(callSuper = true)
+public class Address extends SchoolAwareEntity {
 	
 	private String streetAddress;
 	private String city;
