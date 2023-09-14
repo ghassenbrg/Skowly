@@ -1,6 +1,6 @@
 package com.skowly.core.domain.model.base;
 
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 import com.skowly.core.security.SecurityUtils;
 
@@ -27,23 +27,23 @@ public abstract class BaseEntity {
 
 	@Column(updatable = false)
 	@Setter(AccessLevel.PRIVATE)
-	private LocalDateTime createdAt;
+	private ZonedDateTime createdAt;
 
 	@Setter(AccessLevel.PRIVATE)
-	private LocalDateTime updatedAt;
+	private ZonedDateTime updatedAt;
 
 	@Setter(AccessLevel.PRIVATE)
 	private String updaterUserId;
 
 	@PrePersist
 	protected void onCreate() {
-		this.createdAt = LocalDateTime.now();
+		this.createdAt = ZonedDateTime.now();
 		this.creatorUserId = SecurityUtils.getCurrentUser();
 	}
 
 	@PreUpdate
 	protected void onUpdate() {
-		this.updatedAt = LocalDateTime.now();
+		this.updatedAt = ZonedDateTime.now();
 		this.updaterUserId = SecurityUtils.getCurrentUser();
 	}
 

@@ -26,15 +26,24 @@ public class ClassGroup extends SchoolAwareEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	private String name; // Name of the class group
+
+	private boolean isActive; // Whether the class group is currently active
+
+	private String academicYear; // Academic year this class group belongs to
+
+	private String subjectFocus; // Specific subject focus, if any
+
+	private String scheduleType; // Daily, Weekly, Bi-weekly, etc.
+
 	@ManyToOne
-	@JoinColumn(name = "classroom_id")
-	private Classroom classroom;
+	@JoinColumn(name = "academicClass_id") // Renamed to match AcademicClass
+	private AcademicClass academicClass; // The academic class this class group belongs to
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "timeTable_id")
-	private TimeTable timeTable;
+	private TimeTable timeTable; // TimeTable for this class group
 
-	@OneToMany(mappedBy = "classGroup")
-	private List<Enrollment> enrollments;
-
+	@OneToMany(mappedBy = "classGroup", cascade = CascadeType.ALL)
+	private List<Enrollment> enrollments = new ArrayList<>(); // Students enrolled in this class group
 }

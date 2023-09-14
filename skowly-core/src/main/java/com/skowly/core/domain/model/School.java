@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.skowly.core.domain.model.base.BaseEntity;
 
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -26,33 +27,43 @@ public class School extends BaseEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String name; // School name
-	private String description; // Description or information about the school
+	private String name;
+	private String description;
 
 	@Embedded
-	private Address address; // School address
-	private String phoneNumber; // School phone number
-	private String website; // School website URL
-	private String email; // School contact email
+	private Address address;
+	private String phoneNumber;
+	private String website;
+	private String email;
+	private String logoUrl; // URL to the school's logo
 
 	@Embedded
-	private Principal principal; // Principal's information
+	private Principal principal;
 
-	private int totalStudents; // Total number of students in the school
-	private int totalTeachers; // Total number of teachers in the school
-	private String mapsPosition; // Coordinates or location on maps
+	private int totalStudents;
+	private int totalTeachers;
+	private String mapsPosition;
 
 	@Temporal(TemporalType.DATE)
-	private Date foundingDate; // Date when the school was founded
-	private String accreditation; // Accreditation details, if applicable
-	private String facilities; // Information about school facilities
-	private String extracurricularActivities; // List of extracurricular activities offered
-	private String admissionProcess; // Information on the admission process
+	private Date foundingDate;
+	private String accreditation;
+	private String facilities;
+	private String extracurricularActivities;
+	private String admissionProcess;
+
+	@ElementCollection
+	private List<String> socialMediaHandles; // List of social media handles or URLs
+
+	@OneToMany(mappedBy = "school")
+	private List<AcademicClass> academicClasses;
+
+	@OneToMany(mappedBy = "school")
+	private List<Teacher> teachers; // All teachers associated with this school
+
+	@OneToMany(mappedBy = "school")
+	private List<Student> students; // All students associated with this school
 
 	@OneToMany(mappedBy = "school")
 	private List<Classroom> classrooms;
-
-	@OneToMany(mappedBy = "school")
-	private List<Course> courses;
 
 }

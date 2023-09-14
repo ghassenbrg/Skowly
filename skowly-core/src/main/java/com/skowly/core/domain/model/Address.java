@@ -1,20 +1,30 @@
 package com.skowly.core.domain.model;
 
-import com.skowly.core.domain.model.base.SchoolAwareEntity;
-
 import jakarta.persistence.Embeddable;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 @Data
 @Embeddable
-@EqualsAndHashCode(callSuper = true)
-public class Address extends SchoolAwareEntity {
-	
-	private String streetAddress;
-	private String city;
-	private String state;
-	private String postalCode;
-	private String country;
+public class Address {
 
+	@NotBlank
+	@Size(max = 100)
+	private String streetAddress;
+
+	@NotBlank
+	@Size(max = 50)
+	private String city;
+
+	@Size(max = 50)
+	private String state;
+
+	@NotBlank
+	@Size(max = 20)
+	private String postalCode;
+
+	@NotBlank
+	@Size(max = 50)
+	private String country;
 }

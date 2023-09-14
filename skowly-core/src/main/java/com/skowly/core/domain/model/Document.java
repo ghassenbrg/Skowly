@@ -11,8 +11,8 @@ import jakarta.persistence.ManyToOne;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-@Entity
 @Data
+@Entity
 @EqualsAndHashCode(callSuper = true)
 public class Document extends SchoolAwareEntity {
 
@@ -20,8 +20,11 @@ public class Document extends SchoolAwareEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	private String fileName;
+	private String fileUrl;
+	private String fileExtension;
+
 	@ManyToOne
 	@JoinColumn(name = "resource_id")
 	private Resource resource;
-
 }

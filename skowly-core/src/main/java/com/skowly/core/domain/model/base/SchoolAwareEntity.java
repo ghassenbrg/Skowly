@@ -15,14 +15,14 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = true)
 public abstract class SchoolAwareEntity extends BaseEntity {
 
-	@Column(updatable = false)
+	@Column(name = "tenant_id", updatable = false)
 	@Setter(AccessLevel.PRIVATE)
 	private String schoolId;
 
 	@Override
 	@PrePersist
 	protected void onCreate() {
-		this.schoolId = (String) SecurityUtils.getTokenAttribute("school_id");
+		this.schoolId = (String) SecurityUtils.getTokenAttribute("tenant_id");
 	}
 
 }

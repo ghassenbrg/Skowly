@@ -17,17 +17,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/schools")
 public class SchoolRestController {
-    private final SchoolService schoolService;
 
-    /**
-     * Constructor to initialize the SchoolRestController with a SchoolService instance.
-     *
-     * @param schoolService The SchoolService instance to be used for handling school-related operations.
-     */
     @Autowired
-    public SchoolRestController(SchoolService schoolService) {
-        this.schoolService = schoolService;
-    }
+    private SchoolService schoolService;
 
     /**
      * Get a list of all schools.

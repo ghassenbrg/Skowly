@@ -14,20 +14,35 @@ import jakarta.persistence.OneToMany;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-@Entity
 @Data
+@Entity
 @EqualsAndHashCode(callSuper = true)
 public class Classroom extends SchoolAwareEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "school_id")
-    private School school;
+	private String roomNumber; // The room number or identifier
 
-    @OneToMany(mappedBy = "classroom")
-    private List<ClassGroup> classGroups;
-	
+	private String building; // Building in which the classroom is located
+
+	private int capacity; // Seating capacity of the room
+
+	private boolean hasProjector; // Does the room have a projector?
+
+	private boolean hasWhiteboard; // Does the room have a whiteboard?
+
+	private boolean isActive;
+
+	private boolean isLaboratory;
+
+	// other fields as needed
+
+	@ManyToOne
+	@JoinColumn(name = "school_id")
+	private School school; // The school to which the classroom belongs
+
+	@OneToMany(mappedBy = "classroom")
+	private List<TimeSlot> timeSlots;
 }

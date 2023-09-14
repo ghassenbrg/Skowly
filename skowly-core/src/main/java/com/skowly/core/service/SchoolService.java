@@ -10,12 +10,9 @@ import java.util.List;
 
 @Service
 public class SchoolService {
-    private final SchoolRepository schoolRepository;
 
     @Autowired
-    public SchoolService(SchoolRepository schoolRepository) {
-        this.schoolRepository = schoolRepository;
-    }
+    private SchoolRepository schoolRepository;
 
     public List<School> getAllSchools() {
         return schoolRepository.findAll();
