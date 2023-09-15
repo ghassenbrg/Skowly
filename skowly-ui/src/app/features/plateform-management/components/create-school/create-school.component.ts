@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { Router } from '@angular/router'; // Import Router for navigation
 import { SchoolService } from '../../services/school-service.service';
-import { School } from 'src/app/core/model/school.model';
+import { School } from 'src/app/core/models/school.model';
 
 @Component({
   selector: 'app-create-school',
@@ -10,14 +10,16 @@ import { School } from 'src/app/core/model/school.model';
   styleUrls: ['./create-school.component.scss']
 })
 export class CreateSchoolComponent implements OnInit {
-  newSchool: School = new School(); // Initialize a new School object
+  newSchool!: School // Initialize a new School object
 
   constructor(private schoolService: SchoolService, private router: Router) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.newSchool = new School();
+  }
 
   createSchool() {
-    
+    console.log(this.newSchool)
     // Call the SchoolService to create the new school
     this.schoolService.createSchool(this.newSchool).subscribe((createdSchool) => {
       // Handle the response, e.g., show a success message or navigate to another page

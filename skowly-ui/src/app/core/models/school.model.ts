@@ -19,7 +19,6 @@ export class School {
     users: any[]| undefined;
   
     constructor() {
-      this.id = 0; // Initialize with a default value, or use an appropriate default value
     }
   }
   

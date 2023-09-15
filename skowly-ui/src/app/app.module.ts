@@ -10,6 +10,7 @@ import { PlateformManagementModule } from './features/plateform-management/plate
 import { PrivatePageComponent } from './private-page/private-page.component';
 import { PublicPageComponent } from './public-page/public-page.component';
 import { UnauthorizedPageComponent } from './unauthorized-page/unauthorized-page.component';
+import { CoreModule } from './core/core.module';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { UnauthorizedPageComponent } from './unauthorized-page/unauthorized-page
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
+    CoreModule,
     PlateformManagementModule,
   ],
   providers: [

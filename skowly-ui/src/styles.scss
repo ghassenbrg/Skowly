@@ -1,6 +1,9 @@
 @import "primeng/resources/themes/lara-light-blue/theme.css";
 @import "primeng/resources/primeng.css";
+@import 'variables';
+@import 'bootstrap/scss/bootstrap';
+
 body {
-    font-family: var(--font-family);
+    font-family: 'Helvetica', var(--font-family);
 }
 

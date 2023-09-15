@@ -1,0 +1,29 @@
+.dashboard-container {
+    display: flex;
+    height: 100vh;
+}
+
+.dashboard-sidebar {
+    flex: 0 0 auto; /* flex-grow, flex-shrink, flex-basis */
+    background-color: #ccc;
+    overflow-y: auto;
+}
+
+.dashboard-main-content {
+    flex: 1; /* take the remaining available space */
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+.dashboard-header {
+    position: sticky;
+    top: 0;
+    z-index: 100; /* ensure the header is on top */
+}
+
+.dashboard-content {
+    flex: 1; /* take the remaining available space */
+    padding: 25px 20px;
+    overflow-y: auto; /* add scroll if content overflows */
+}
