@@ -1,89 +1,128 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-6 offset-md-3">
+    <div class="col-md-8 offset-md-2">
       <form>
-        <div class="mb-3">
-          <label for="name" class="form-label">Name</label>
-          <input  name="name" type="text" class="form-control" [(ngModel)]="newSchool.name" />
+        <ul class="nav nav-tabs" id="myTabs" role="tablist">
+          <li class="nav-item" role="presentation">
+            <a class="nav-link active" id="general-tab" data-bs-toggle="tab" href="#general" role="tab" aria-controls="general" aria-selected="true">General</a>
+          </li>
+          <li class="nav-item" role="presentation">
+            <a class="nav-link" id="contact-tab" data-bs-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
+          </li>
+          <li class="nav-item" role="presentation">
+            <a class="nav-link" id="principal-tab" data-bs-toggle="tab" href="#principal" role="tab" aria-controls="principal" aria-selected="false">Principal</a>
+          </li>
+          <li class="nav-item" role="presentation">
+            <a class="nav-link" id="details-tab" data-bs-toggle="tab" href="#details" role="tab" aria-controls="details" aria-selected="false">Details</a>
+          </li>
+        </ul>
+        <div class="tab-content" id="myTabsContent">
+          <!-- General Tab -->
+          <div class="tab-pane fade show active" id="general" role="tabpanel" aria-labelledby="general-tab">
+            <div class="mb-3">
+              <label for="name" class="form-label">Name</label>
+              <input name="name" type="text" class="form-control custom-input" [(ngModel)]="newSchool.name" />
+            </div>
+
+            <div class="mb-3">
+              <label for="description" class="form-label">Description</label>
+              <input name="description" type="text" class="form-control custom-input" [(ngModel)]="newSchool.description" />
+            </div>
+
+            <div class="mb-3">
+              <label for="phoneNumber" class="form-label">Phone Number</label>
+              <input name="phoneNumber" type="text" class="form-control custom-input" [(ngModel)]="newSchool.phoneNumber" />
+            </div>
+          </div>
+
+          <!-- Contact Tab -->
+          <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+            <div class="mb-3">
+              <label for="address" class="form-label">Street Address</label>
+              <input name="address" type="text" class="form-control custom-input" [(ngModel)]="newSchool.address.streetAddress" />
+            </div>
+
+            <div class="mb-3">
+              <label for="city" class="form-label">City</label>
+              <input name="city" type="text" class="form-control custom-input" [(ngModel)]="newSchool.address.city" />
+            </div>
+
+            <div class="mb-3">
+              <label for="state" class="form-label">State</label>
+              <input name="state" type="text" class="form-control custom-input" [(ngModel)]="newSchool.address.state" />
+            </div>
+          </div>
+
+          <!-- Principal Tab -->
+          <div class="tab-pane fade" id="principal" role="tabpanel" aria-labelledby="principal-tab">
+            <div class="mb-3">
+              <label for="principalName" class="form-label">Principal Name</label>
+              <input name="principalName" type="text" class="form-control custom-input" [(ngModel)]="newSchool.principal.principalName" />
+            </div>
+
+            <div class="mb-3">
+              <label for="principalEmail" class="form-label">Principal Email</label>
+              <input name="principalEmail" type="email" class="form-control custom-input" [(ngModel)]="newSchool.principal.principalEmail" />
+            </div>
+          </div>
+
+          <!-- Details Tab -->
+          <div class="tab-pane fade" id="details" role="tabpanel" aria-labelledby="details-tab">
+            <div class="mb-3">
+              <label for="totalStudents" class="form-label">Total Students</label>
+              <input name="totalStudents" type="number" class="form-control custom-input" [(ngModel)]="newSchool.totalStudents" />
+            </div>
+
+            <div class="mb-3">
+              <label for="totalTeachers" class="form-label">Total Teachers</label>
+              <input name="totalTeachers" type="number" class="form-control custom-input" [(ngModel)]="newSchool.totalTeachers" />
+            </div>
+
+            <div class="mb-3">
+              <label for="mapsPosition" class="form-label">Maps Position</label>
+              <input name="mapsPosition" type="text" class="form-control custom-input" [(ngModel)]="newSchool.mapsPosition" />
+            </div>
+
+            <div class="mb-3">
+              <label for="foundingDate" class="form-label">Founding Date</label>
+              <input name="foundingDate" type="date" class="form-control custom-input" [(ngModel)]="newSchool.foundingDate" />
+            </div>
+
+            <div class="mb-3">
+              <label for="accreditation" class="form-label">Accreditation</label>
+              <input name="accreditation" type="text" class="form-control custom-input" [(ngModel)]="newSchool.accreditation" />
+            </div>
+
+            <div class="mb-3">
+              <label for="website" class="form-label">Website</label>
+              <input name="website" type="text" class="form-control custom-input" [(ngModel)]="newSchool.website" />
+            </div>
+
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input name="email" type="text" class="form-control custom-input" [(ngModel)]="newSchool.email" />
+            </div>
+
+            <div class="mb-3">
+              <label for="facilities" class="form-label">Facilities</label>
+              <input name="facilities" type="text" class="form-control custom-input" [(ngModel)]="newSchool.facilities" />
+            </div>
+
+            <div class="mb-3">
+              <label for="extracurricularActivities" class="form-label">Extracurricular Activities</label>
+              <input name="extracurricularActivities" type="text" class="form-control custom-input" [(ngModel)]="newSchool.extracurricularActivities" />
+            </div>
+
+            <div class="mb-3">
+              <label for="admissionProcess" class="form-label">Admission Process</label>
+              <input name="admissionProcess" type="text" class="form-control custom-input" [(ngModel)]="newSchool.admissionProcess" />
+            </div>
+
+          </div>
         </div>
 
         <div class="mb-3">
-          <label for="description" class="form-label">Description</label>
-          <input  name="description" type="text" class="form-control" [(ngModel)]="newSchool.description" />
-        </div>
-
-        <div class="mb-3">
-          <label for="address" class="form-label">Address</label>
-          <input  name="address" type="text" class="form-control" [(ngModel)]="newSchool.address.streetAddress" />
-        </div>
-
-        <div class="mb-3">
-          <label for="phoneNumber" class="form-label">Phone Number</label>
-          <input  name="phoneNumber" type="text" class="form-control" [(ngModel)]="newSchool.phoneNumber" />
-        </div>
-
-        <div class="mb-3">
-          <label for="website" class="form-label">Website</label>
-          <input  name="website" type="text" class="form-control" [(ngModel)]="newSchool.website" />
-        </div>
-
-        <div class="mb-3">
-          <label for="email" class="form-label">Email</label>
-          <input  name="email" type="text" class="form-control" [(ngModel)]="newSchool.email" />
-        </div>
-
-        <div class="mb-3">
-          <label for="principalName" class="form-label">Principal Name</label>
-          <input  name="principalName" type="text" class="form-control" [(ngModel)]="newSchool.principal.principalName" />
-        </div>
-
-        <div class="mb-3">
-          <label for="totalStudents" class="form-label">Total Students</label>
-          <input  name="totalStudents" type="number" class="form-control" [(ngModel)]="newSchool.totalStudents" />
-        </div>
-
-        <div class="mb-3">
-          <label for="totalTeachers" class="form-label">Total Teachers</label>
-          <input  name="totalTeachers" type="number" class="form-control" [(ngModel)]="newSchool.totalTeachers" />
-        </div>
-
-        <div class="mb-3">
-          <label for="mapsPosition" class="form-label">Maps Position</label>
-          <input  name="mapsPosition" type="text" class="form-control" [(ngModel)]="newSchool.mapsPosition" />
-        </div>
-
-        <div class="mb-3">
-          <label for="foundingDate" class="form-label">Founding Date</label>
-          <input  name="foundingDate" type="date" class="form-control" [(ngModel)]="newSchool.foundingDate" />
-        </div>
-
-        <div class="mb-3">
-          <label for="accreditation" class="form-label">Accreditation</label>
-          <input  name="accreditation" type="text" class="form-control" [(ngModel)]="newSchool.accreditation" />
-        </div>
-
-        <div class="mb-3">
-          <label for="facilities" class="form-label">Facilities</label>
-          <input  name="facilities" type="text" class="form-control" [(ngModel)]="newSchool.facilities" />
-        </div>
-
-        <div class="mb-3">
-          <label for="extracurricularActivities" class="form-label">Extracurricular Activities</label>
-          <input  name="extracurricularActivities" type="text" class="form-control" [(ngModel)]="newSchool.extracurricularActivities" />
-        </div>
-
-        <div class="mb-3">
-          <label for="admissionProcess" class="form-label">Admission Process</label>
-          <input  name="admissionProcess" type="text" class="form-control" [(ngModel)]="newSchool.admissionProcess" />
-        </div>
-
-        <div class="mb-3">
-          <label for="users" class="form-label">Users</label>
-          <input  name="users" type="text" class="form-control" [(ngModel)]="newSchool.users" />
-        </div>
-
-        <div class="mb-3">
-          <button type="button" class="btn btn-success" (click)="createSchool()">Create</button>
+          <button type="button" class="btn btn-success custom-button" (click)="createSchool()">Create</button>
         </div>
       </form>
     </div>
