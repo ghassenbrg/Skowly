@@ -1,0 +1,64 @@
+<div class="skowly-header d-flex flex-row-reverse">
+  <!-- ----------- user-section ----------- -->
+  <div class="header-section user-section">
+    <img
+      src="/assets/temp/user_avatar.png"
+      alt="User Avatar"
+      class="user-avatar"
+    />
+    <div class="user-details">
+      <span class="user-name text">Michael K. Harrison</span>
+      <span class="user-role">Parent</span>
+    </div>
+    <div class="header-icon">
+      <i class="fa-solid fa-caret-down"></i>
+    </div>
+  </div>
+  <!-- ----------- language ----------- -->
+  <div class="header-section">
+    <div class="header-icon">
+      <i class="fa-solid fa-language"></i>
+    </div>
+    <div class="selected-language">
+      <span class="text">English</span>
+    </div>
+    <div class="header-icon">
+      <i class="fa-solid fa-caret-down"></i>
+    </div>
+  </div>
+  <!-- ----------- notification ----------- -->
+  <div class="header-section icon-only">
+    <div class="header-icon" pBadge severity="danger" [badgeDisabled]="false" value="2">
+      <i class="fa-regular fa-bell"></i>
+    </div>
+  </div>
+  <!-- ----------- messages ----------- -->
+  <div class="header-section icon-only">
+    <div class="header-icon" pBadge severity="danger" [badgeDisabled]="false" value="2">
+      <i class="fa-regular fa-envelope"></i>
+    </div>
+  </div>
+  <!-- ----------- announcements ----------- -->
+  <div class="header-section icon-only">
+    <div class="header-icon" pBadge severity="danger" [badgeDisabled]="false" value="2">
+      <i class="fa-solid fa-bullhorn"></i>
+    </div>
+  </div>
+  <!-- ----------- expand ----------- -->
+  <div class="header-section icon-only"  (click)="toggleFullscreen()">
+    <div class="header-icon">
+      <i [ngClass]="isFullScreen ? 'fa-solid fa-minimize' : 'fa-solid fa-expand'"></i>
+    </div>
+  </div>
+    <!-- ----------- logo + arrow ----------- -->
+    <div class="d-flex me-auto" style="cursor: pointer;">
+      <div class="arrow-icon align-self-center">
+        <i class="fa-solid fa-arrow-left"></i>
+      </div>
+      <img
+      src="/assets/img/skowly-logo.png"
+      alt="User Avatar"
+      class="skowly-logo"
+    />
+    </div>
+</div>

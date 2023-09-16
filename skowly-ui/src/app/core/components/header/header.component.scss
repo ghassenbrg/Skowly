@@ -1,0 +1,66 @@
+.skowly-header {
+  width: 100%;
+  background-color: #ffffff;
+  border-bottom: 1px solid #d8d8e8;
+  padding: 15px 20px 10px 20px;
+}
+
+.header-section {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  height: 47px;
+  border: 1px solid #d8d8e8;
+  border-radius: 8px;
+  width: auto;
+  margin: 0 10px;
+  &:hover {
+    background-color: #f7f7fa;
+  }
+}
+
+.user-section .user-avatar {
+  width: 47px;
+  height: 47px;
+  border-radius: 5px;
+}
+
+.user-section .user-details {
+  flex-grow: 1;
+  padding: 10px;
+}
+
+.user-section .user-name,
+.user-section .user-role {
+  display: block;
+}
+
+.text {
+  color: #565675;
+  font-size: 0.95em;
+}
+
+.user-section .user-role {
+  color: #fc811a;
+  font-size: 0.9em;
+}
+
+.arrow-icon {
+  color: --primary;
+  margin: 0 10px 0 10px;
+  font-size: 1.6em;
+}
+
+.header-icon {
+  color: #565675;
+  margin: 0 10px;
+  font-size: 1.8em;
+}
+
+.skowly-logo {
+  height: 47px;
+  transition: transform 0.2s;
+  &:hover {
+    transform: scale(1.1);
+  }
+}
