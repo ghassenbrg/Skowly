@@ -17,11 +17,18 @@ export class SidebarComponent {
   currentActiveItemPath: string = '';
 
   menu: MenuItem[] = [
+
     {
       label: 'Home',
       path: '/dashboard',
       icon: 'fa-solid fa-house-chimney',
       color: '#E57676',
+    },
+    {
+      label: 'Schools',
+      path: '/dashboard/platform-management/schools',
+      icon: 'fa-solid fa-graduation-cap',
+      color: '#E17DA5',
     },
     {
       label: 'Profile & Details',

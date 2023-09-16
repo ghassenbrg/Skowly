@@ -25,7 +25,7 @@ export class CreateSchoolComponent implements OnInit {
       // Handle the response, e.g., show a success message or navigate to another page
       console.log('Created School:', createdSchool);
       // Navigate to a different page after creating the school
-      this.router.navigate(['/platform-management/schools']);
+      this.router.navigate(['/dashboard/platform-management/schools']);
     });
   }
 }

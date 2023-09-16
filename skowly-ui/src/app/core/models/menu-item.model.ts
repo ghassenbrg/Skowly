@@ -4,4 +4,5 @@ export interface MenuItem {
     icon?: string,
     color: string,
     subMenu?: MenuItem[]
+    roles?:String[]
 }
