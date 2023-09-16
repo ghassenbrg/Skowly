@@ -1,14 +1,12 @@
-@import "./../../../../../styles/variables";
-
+@import 'variables';
 
 
 
 
 /* Custom styling for the component background */
 .container {
-  background-color: #f5f5f5; /* Set your desired background color */
+  background-color: white; /* Set your desired background color */
   padding: 20px;
-  border-radius: 10px; /* Rounded corners for the container */
 }
 
 /* Custom styling for the tabs */

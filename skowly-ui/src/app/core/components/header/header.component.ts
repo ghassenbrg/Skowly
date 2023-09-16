@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { UiService } from '../../services/ui.service';
+import { keycloak } from 'src/main';
 
 @Component({
   selector: 'app-header',
@@ -8,10 +9,23 @@ import { UiService } from '../../services/ui.service';
 })
 export class HeaderComponent {
   isFullScreen: boolean = false;
+  userInfo: any = keycloak.userInfo;
 
   constructor(protected uiService: UiService) {}
 
   ngOnInit() {
+    this.userInfo.role = 'Parent';
+    this.isFullScreen = document.fullscreenElement ? true : false;
+    // Add fullscreen change event listener
+    document.addEventListener('fullscreenchange', this.onFullscreenChange.bind(this));
+  }
+
+  ngOnDestroy() {
+    // Remove fullscreen change event listener
+    document.removeEventListener('fullscreenchange', this.onFullscreenChange.bind(this));
+  }
+
+  onFullscreenChange() {
     this.isFullScreen = document.fullscreenElement ? true : false;
   }
 

@@ -2,15 +2,19 @@
   <!-- ----------- user-section ----------- -->
   <div class="header-section user-section">
     <img
-      src="/assets/temp/user_avatar.png"
+      [src]="
+        userInfo.avatar_url
+          ? userInfo.avatar_url
+          : '/assets/temp/user_avatar.png'
+      "
       alt="User Avatar"
       class="user-avatar"
     />
     <div class="user-details">
-      <span class="user-name text">Michael K. Harrison</span>
-      <span class="user-role">Parent</span>
+      <span class="user-name text">{{ userInfo.name }}</span>
+      <span class="user-role">{{ userInfo.role }}</span>
     </div>
-    <div class="header-icon">
+    <div class="header-icon down-icon">
       <i class="fa-solid fa-caret-down"></i>
     </div>
   </div>
@@ -22,7 +26,7 @@
     <div class="selected-language">
       <span class="text">English</span>
     </div>
-    <div class="header-icon">
+    <div class="header-icon down-icon">
       <i class="fa-solid fa-caret-down"></i>
     </div>
   </div>

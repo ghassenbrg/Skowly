@@ -1,9 +1,15 @@
 @import "primeng/resources/themes/lara-light-blue/theme.css";
 @import "primeng/resources/primeng.css";
-@import './styles/variables';
+@import 'styles/variables';
 @import 'bootstrap/scss/bootstrap';
 
 body {
     font-family: 'Helvetica', var(--font-family);
+    background-color: #F4F8FB;
+}
+
+.primary-border {
+  border: 1px solid #d8d8e8;
+  border-radius: 8px;
 }
 

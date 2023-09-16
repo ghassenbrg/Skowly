@@ -5,9 +5,9 @@
   //position: fixed;
   top: 0;
   left: 0;
-  width: 15vw;
+  min-width: 15vw;
   padding-top: 20px;
-  transition: width 0.4s ease-in-out;
+  transition: min-width 0.4s ease-in-out;
 
   // Student details
   .student-details {
@@ -60,7 +60,7 @@
 .sidebar-collapsed {
   min-width: 60px;
   width: 60px;
-  transition: width 0.4s ease-in-out;
+  transition: min-width 0.4s ease-in-out;
 
   .collapsed-student-photo {
     img {
