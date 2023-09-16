@@ -4,6 +4,7 @@ import { ScoolsListComponent } from './components/scools-list/scools-list.compon
 import { RouterModule, Routes } from '@angular/router';
 import { CreateSchoolComponent } from './components/create-school/create-school.component';
 import { FormsModule } from '@angular/forms';
+import { EditSchoolComponent } from './components/edit-school/edit-school.component';
 
 
 
@@ -15,13 +16,18 @@ const schoolRoutes: Routes = [
   {
     path: 'create-school',
     component: CreateSchoolComponent 
+  },
+  { 
+    path: 'edit-school/:schoolId',
+    component: EditSchoolComponent
   }
 ];
 
 @NgModule({
   declarations: [
     ScoolsListComponent,
-    CreateSchoolComponent
+    CreateSchoolComponent,
+    EditSchoolComponent
   ],
   imports: [
     CommonModule,
