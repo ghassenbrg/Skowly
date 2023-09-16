@@ -1,6 +1,12 @@
 <div class="dark-sidebar">
-  <div class="sidebar" [ngClass]="{ 'sidebar-collapsed': !(uiService.sidebarExpansion$ | async) }">
-    <div *ngIf="!(uiService.sidebarExpansion$ | async)" class="collapsed-student-photo">
+  <div
+    class="sidebar"
+    [ngClass]="{ 'sidebar-collapsed': !(uiService.sidebarExpansion$ | async) }"
+  >
+    <div
+      *ngIf="!(uiService.sidebarExpansion$ | async)"
+      class="collapsed-student-photo"
+    >
       <img src="/assets/temp/student_f.png" alt="Student" />
     </div>
     <!-- Student Name and Grade -->
@@ -35,6 +41,8 @@
               }
             : { 'background-color': 'transparent' }
         "
+        [pTooltip]="item.label"
+        [tooltipDisabled]="(uiService.sidebarExpansion$ | async) ? true : false"
         (mouseover)="onMouseOver(item)"
         (mouseout)="onMouseOut()"
       >
@@ -46,7 +54,9 @@
               : { color: item.color }
           "
         ></i>
-        <span *ngIf="(uiService.sidebarExpansion$ | async)">{{ item.label }}</span>
+        <span *ngIf="uiService.sidebarExpansion$ | async">{{
+          item.label
+        }}</span>
       </li>
     </ul>
   </div>

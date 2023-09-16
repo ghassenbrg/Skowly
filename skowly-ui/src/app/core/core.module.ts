@@ -8,10 +8,18 @@ import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { BadgeModule } from 'primeng/badge';
 import { HeaderComponent } from './components/header/header.component';
+import { TooltipModule } from 'primeng/tooltip';
 
 @NgModule({
   declarations: [SidebarComponent, HeaderComponent, DashboardPageComponent],
-  imports: [CommonModule, RouterModule, BrowserModule, FormsModule, BadgeModule],
+  imports: [
+    CommonModule,
+    RouterModule,
+    BrowserModule,
+    FormsModule,
+    BadgeModule,
+    TooltipModule,
+  ],
   exports: [DashboardPageComponent],
 })
 export class CoreModule {}
