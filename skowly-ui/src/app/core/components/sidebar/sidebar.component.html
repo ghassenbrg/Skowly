@@ -1,48 +1,53 @@
-<div class="sidebar">
-  <!-- Student Name and Grade -->
-  <div class="student-details">
-    <div class="student-photo">
-      <img
-        src="/assets/temp/student_f.png"
-        alt="Student"
-        class="rounded-circle"
-      />
+<div class="dark-sidebar">
+  <div class="sidebar" [ngClass]="{ 'sidebar-collapsed': !(uiService.sidebarExpansion$ | async) }">
+    <div *ngIf="!(uiService.sidebarExpansion$ | async)" class="collapsed-student-photo">
+      <img src="/assets/temp/student_f.png" alt="Student" />
     </div>
-    <div class="name">Stephanie K. Harrison</div>
-    <div class="grade">1st Grade - B</div>
-    <!-- Select another child button -->
-    <button class="btn btn-primary">
-      <i class="fa-solid fa-repeat"></i> Select Another Child
-    </button>
-  </div>
+    <!-- Student Name and Grade -->
+    <div class="student-details">
+      <div class="student-photo">
+        <img
+          src="/assets/temp/student_f.png"
+          alt="Student"
+          class="rounded-circle"
+        />
+      </div>
+      <div class="name">Stephanie K. Harrison</div>
+      <div class="grade">1st Grade - B</div>
+      <!-- Select another child button -->
+      <button class="btn btn-primary">
+        <i class="fa-solid fa-repeat"></i> Select Another Child
+      </button>
+    </div>
 
-  <!-- Menu -->
-  <span class="menu-label">Menu</span>
-  <ul class="menu-list">
-    <li
-      *ngFor="let item of menu"
-      [routerLink]="[item.path]"
-      [ngStyle]="
-        currentHoveredItem === item ||  currentActiveItemPath === item.path
-          ? {
-              color:  currentActiveItemPath === item.path ? '#fff' : 'inherit',
-              'background-color':
-                 currentActiveItemPath === item.path ? item.color : '#E4EFF6'
-            }
-          : { 'background-color': 'transparent' }
-      "
-      (mouseover)="onMouseOver(item)"
-      (mouseout)="onMouseOut()"
-    >
-      <i
-        [ngClass]="item.icon"
+    <!-- Menu -->
+    <span class="menu-label">Menu</span>
+    <ul class="menu-list">
+      <li
+        *ngFor="let item of menu"
+        [routerLink]="[item.path]"
         [ngStyle]="
-        currentActiveItemPath === item.path
-            ? { color: '#fff' }
-            : { color: item.color }
+          currentHoveredItem === item || currentActiveItemPath === item.path
+            ? {
+                color: currentActiveItemPath === item.path ? '#fff' : 'inherit',
+                'background-color':
+                  currentActiveItemPath === item.path ? item.color : '#3B3967'
+              }
+            : { 'background-color': 'transparent' }
         "
-      ></i>
-      {{ item.label }}
-    </li>
-  </ul>
+        (mouseover)="onMouseOver(item)"
+        (mouseout)="onMouseOut()"
+      >
+        <i
+          [ngClass]="item.icon"
+          [ngStyle]="
+            currentActiveItemPath === item.path
+              ? { color: '#fff' }
+              : { color: item.color }
+          "
+        ></i>
+        <span *ngIf="(uiService.sidebarExpansion$ | async)">{{ item.label }}</span>
+      </li>
+    </ul>
+  </div>
 </div>

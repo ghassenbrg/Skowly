@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { UiService } from '../../services/ui.service';
 
 @Component({
   selector: 'app-header',
@@ -7,6 +8,8 @@ import { Component } from '@angular/core';
 })
 export class HeaderComponent {
   isFullScreen: boolean = false;
+
+  constructor(protected uiService: UiService) {}
 
   ngOnInit() {
     this.isFullScreen = document.fullscreenElement ? true : false;

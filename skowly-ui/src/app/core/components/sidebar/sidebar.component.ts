@@ -1,11 +1,8 @@
 import { Component } from '@angular/core';
-import {
-  ActivatedRoute,
-  NavigationEnd,
-  Router
-} from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { MenuItem } from '../../models/menu-item.model';
+import { UiService } from '../../services/ui.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -17,7 +14,6 @@ export class SidebarComponent {
   currentActiveItemPath: string = '';
 
   menu: MenuItem[] = [
-
     {
       label: 'Home',
       path: '/dashboard',
@@ -46,7 +42,7 @@ export class SidebarComponent {
       label: 'Calendar',
       path: '/calendar',
       icon: 'fa-solid fa-calendar-days',
-      color: '#575787',
+      color: '#6f82e0',
     },
     {
       label: 'Academic & Attendance',
@@ -62,7 +58,8 @@ export class SidebarComponent {
     },
   ];
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute) {}
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, protected uiService: UiService) {
+  }
 
   ngOnInit() {
     //this.setFullPath();
