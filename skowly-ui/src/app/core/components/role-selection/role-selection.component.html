@@ -1,0 +1,40 @@
+<div class="role-selection-container">
+  <h1 class="role-selection-title">Select Your Role</h1>
+  <div
+    class="role-container d-flex align-content-center justify-content-center flex-wrap"
+  >
+    <div
+      class="role-item primary-border"
+      style="cursor: pointer"
+      *ngFor="let item of rolesDataList"
+      (click)="setSelectedRole(item.value)"
+    >
+      <i
+        *ngIf="selectedRole === item.value"
+        class="fa-regular fa-circle-check check-icon"
+      ></i>
+      <div class="d-flex align-content-center flex-row">
+        <div class="role-img align-self-center">
+          <img [src]="item.imgUrl" alt="Role Image" class="role-image" />
+        </div>
+        <div class="role-info align-self-center">
+          <h5>{{ item.label }}</h5>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="rolesDataList.length === 0" class="role-item role-problem primary-border">
+      <div class="d-flex align-content-center flex-row">
+        <div class="role-img align-self-center">
+          <img
+            src="/assets/img/roles/problem.png"
+            alt="Role problem"
+            class="role-image"
+          />
+        </div>
+        <div class="role-info align-self-center">
+          <p>The current user has no roles !</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

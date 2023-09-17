@@ -71,6 +71,14 @@
         "attributes": {}
       },
       {
+        "id": "22c9fc4d-075a-4042-bd3a-511ab298f90b",
+        "name": "ADMIN",
+        "composite": false,
+        "clientRole": false,
+        "containerId": "skowly",
+        "attributes": {}
+      },
+      {
         "id": "d61510e5-0576-4abf-af81-6ff14823137a",
         "name": "SKOWLY_ADMIN",
         "composite": false,
@@ -120,14 +128,6 @@
         "id": "1d757bec-18ae-4589-b40c-79abe35d8081",
         "name": "uma_authorization",
         "description": "${role_uma_authorization}",
-        "composite": false,
-        "clientRole": false,
-        "containerId": "skowly",
-        "attributes": {}
-      },
-      {
-        "id": "9486d4a1-92d8-4e68-9a80-6a017f49f47f",
-        "name": "admin",
         "composite": false,
         "clientRole": false,
         "containerId": "skowly",
@@ -1374,16 +1374,16 @@
   ],
   "defaultDefaultClientScopes": [
     "role_list",
-    "roles",
     "profile",
-    "web-origins",
-    "email"
+    "email",
+    "roles",
+    "web-origins"
   ],
   "defaultOptionalClientScopes": [
     "offline_access",
-    "microprofile-jwt",
     "address",
-    "phone"
+    "phone",
+    "microprofile-jwt"
   ],
   "browserSecurityHeaders": {
     "contentSecurityPolicyReportOnly": "",

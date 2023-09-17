@@ -9,9 +9,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BadgeModule } from 'primeng/badge';
 import { HeaderComponent } from './components/header/header.component';
 import { TooltipModule } from 'primeng/tooltip';
+import { RoleSelectionComponent } from './components/role-selection/role-selection.component';
 
 @NgModule({
-  declarations: [SidebarComponent, HeaderComponent, DashboardPageComponent],
+  declarations: [SidebarComponent, HeaderComponent, DashboardPageComponent, RoleSelectionComponent],
   imports: [
     CommonModule,
     RouterModule,
@@ -20,6 +21,6 @@ import { TooltipModule } from 'primeng/tooltip';
     BadgeModule,
     TooltipModule,
   ],
-  exports: [DashboardPageComponent],
+  exports: [DashboardPageComponent, RoleSelectionComponent],
 })
 export class CoreModule {}

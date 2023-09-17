@@ -3,10 +3,10 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { AuthGuard } from './core/auth/auth.guard';
+import { DashboardPageComponent } from './core/components/dashboard-page/dashboard-page.component';
+import { RoleSelectionComponent } from './core/components/role-selection/role-selection.component';
 import { PrivatePageComponent } from './private-page/private-page.component';
 import { PublicPageComponent } from './public-page/public-page.component';
-import { UnauthorizedPageComponent } from './unauthorized-page/unauthorized-page.component';
-import { DashboardPageComponent } from './core/components/dashboard-page/dashboard-page.component';
 
 const routes: Routes = [
   {
@@ -25,22 +25,25 @@ const routes: Routes = [
         canActivate: [AuthGuard],
         children: [
           {
-            path: 'unauthorized',
-            component: UnauthorizedPageComponent,
-            data: { allowAnonymous: true },
-          },
-          {
             path: 'private-page',
             component: PrivatePageComponent,
+            canActivate: [AuthGuard],
           },
           {
             path: 'platform-management',
+            canActivate: [AuthGuard],
             loadChildren: () =>
               import(
                 './features/plateform-management/plateform-management.module'
               ).then((m) => m.PlateformManagementModule),
           },
         ],
+      },
+      {
+        path: 'role-selection',
+        component: RoleSelectionComponent,
+        canActivate: [AuthGuard],
+        data: { noRoleNeeded: true },
       },
     ],
   },

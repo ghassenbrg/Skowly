@@ -1,0 +1,62 @@
+@import "variables";
+
+.role-selection-container {
+  color: $primary;
+  text-align: center;
+  width: 100%;
+  padding: 0 10vw;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+}
+
+.check-icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 1.5em;
+  padding: 10px;
+  color: $secondary;
+}
+
+.role-selection-title {
+  font-size: 2em;
+  margin-bottom: 1em;
+}
+
+.d-flex {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.role-item {
+  position: relative;
+  width: 300px;
+  margin: 10px;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  &:hover {
+    background-color: #fbf9f7;
+  }
+}
+
+.role-problem {
+  background-color: transparent;
+  color: $secondary;
+  &:hover {
+    background-color: transparent;
+  }
+}
+
+.role-image {
+  width: 100px;
+  padding: 10px 15px;
+}

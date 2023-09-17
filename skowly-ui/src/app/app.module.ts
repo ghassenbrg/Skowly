@@ -1,5 +1,5 @@
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER  } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { FormsModule } from '@angular/forms';
@@ -11,6 +11,13 @@ import { PrivatePageComponent } from './private-page/private-page.component';
 import { PublicPageComponent } from './public-page/public-page.component';
 import { UnauthorizedPageComponent } from './unauthorized-page/unauthorized-page.component';
 import { CoreModule } from './core/core.module';
+import { AuthenticationService } from './core/auth/auth.service';
+
+export function initializeApp(authService: AuthenticationService) {
+  return (): Promise<any> => {
+    return authService.initializeApp();
+  };
+}
 
 @NgModule({
   declarations: [
@@ -29,6 +36,12 @@ import { CoreModule } from './core/core.module';
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initializeApp,
+      deps: [AuthenticationService],
+      multi: true,
+    },
     // other providers
   ],
   bootstrap: [AppComponent],
