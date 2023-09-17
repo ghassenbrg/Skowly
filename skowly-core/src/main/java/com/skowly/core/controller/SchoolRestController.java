@@ -55,6 +55,9 @@ public class SchoolRestController {
     @PostMapping
     public ResponseEntity<School> createSchool(@RequestBody School school) {
         School createdSchool = schoolService.createSchool(school);
+        	if(school == null) {
+        		  throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error creating school");
+        	}
         return ResponseEntity.status(HttpStatus.CREATED).body(createdSchool);
     }
 
