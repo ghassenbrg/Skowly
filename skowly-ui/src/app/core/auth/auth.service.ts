@@ -1,34 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
 import { keycloak } from 'src/main';
 import { LocalStorageKeys } from '../constants/local-storage.constant';
 import { SecurityRolesData } from '../constants/security-role.constant';
+import { LanguageService } from '../services/language.service';
 
 const defaultProfile: string = 'en';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
-  constructor(private router: Router, private translate: TranslateService) {}
-
-  // Initialization Methods
-  async initializeApp(): Promise<void> {
-    try {
-      this.getSelectedRole();
-      const userInfo: any = this.getUserInfo();
-      this.translate.setDefaultLang(defaultProfile);
-      let currentProfile = this.getProfile();
-      if (!currentProfile) {
-        currentProfile = userInfo?.profile ?? defaultProfile;
-        this.setProfile(currentProfile as string);
-      } else {
-        this.translate.use(currentProfile);
-      }
-    } catch (error) {
-      console.error('Failed to initialize app:', error);
-      throw error;
-    }
-  }
+  constructor(
+    private router: Router,
+    private languageService: LanguageService
+  ) {}
 
   // Auth Methods
   isAuthenticated(): boolean {
@@ -89,9 +73,10 @@ export class AuthenticationService {
     return keycloak.userInfo ?? {};
   }
 
-  setProfile(profile: string): void {
-    this.translate.use(profile);
-    localStorage.setItem(LocalStorageKeys.profileKey, profile);
+  setProfile(profile: string, reload?: boolean): void {
+    let languageObj: any = this.languageService.getLanguageObj(profile);
+    localStorage.setItem(LocalStorageKeys.profileKey, languageObj.value);
+    this.languageService.changeLanguageByObj(languageObj, reload);
   }
 
   getProfile(): string | null {

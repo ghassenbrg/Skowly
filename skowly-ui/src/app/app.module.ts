@@ -8,15 +8,16 @@ import { AppComponent } from './app.component';
 import { AuthenticationService } from './core/auth/auth.service';
 import { CoreModule } from './core/core.module';
 import { RequestInterceptor } from './core/interceptors/request.interceptor';
+import { AppInitializer } from './core/services/app.initalizer';
 import { PlateformManagementModule } from './features/plateform-management/plateform-management.module';
 import { PrivatePageComponent } from './private-page/private-page.component';
 import { PublicPageComponent } from './public-page/public-page.component';
 import { SharedModule } from './shared/shared.module';
 import { UnauthorizedPageComponent } from './unauthorized-page/unauthorized-page.component';
 
-export function initializeApp(authService: AuthenticationService) {
+export function initializeApp(appInitializer: AppInitializer) {
   return (): Promise<any> => {
-    return authService.initializeApp();
+    return appInitializer.initializeApp();
   };
 }
 
@@ -41,7 +42,7 @@ export function initializeApp(authService: AuthenticationService) {
     {
       provide: APP_INITIALIZER,
       useFactory: initializeApp,
-      deps: [AuthenticationService],
+      deps: [AppInitializer],
       multi: true,
     },
     // other providers
