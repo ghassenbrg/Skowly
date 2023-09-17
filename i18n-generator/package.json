@@ -1,0 +1,17 @@
+{
+  "name": "i18n-generator",
+  "version": "1.0.0",
+  "description": "The i18n-generator is an npm package designed for multi-language support in Angular applications. The package reads an Excel spreadsheet containing different language translations for various features and components within an application. The generator then produces JSON files for each supported language, allowing for seamless integration with i18n tools like ngx-translate.",
+  "main": "index.js",
+  "bin": {
+    "i18n-generator": "index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ghassen Bargougui",
+  "license": "ISC",
+  "dependencies": {
+    "xlsx": "^0.18.5"
+  }
+}

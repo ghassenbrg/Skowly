@@ -1,0 +1,14 @@
+{
+  "global": {
+    "roles": {
+      "loginAs": "Se connecter en tant que:",
+      "noRole": "L'utilisateur actuel n'a aucun rôle !",
+      "skowlyAdmin": "Administrateur Skowly",
+      "schoolAdmin": "Administrateur de l'école",
+      "schoolStaff": "Personnel de l'école",
+      "parent": "Parent",
+      "student": "Étudiant",
+      "teacher": "Professeur"
+    }
+  }
+}

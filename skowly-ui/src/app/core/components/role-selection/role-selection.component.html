@@ -1,5 +1,5 @@
 <div class="role-selection-container">
-  <h1 class="role-selection-title">{{'core.roleSelection.loginAs' | translate }}</h1>
+  <h1 class="role-selection-title">{{ "global.roles.loginAs" | translate }}</h1>
   <div
     class="role-container d-flex align-content-center justify-content-center flex-wrap"
   >
@@ -18,11 +18,14 @@
           <img [src]="item.imgUrl" alt="Role Image" class="role-image" />
         </div>
         <div class="role-info align-self-center">
-          <h5>{{ item.label }}</h5>
+          <h5>{{ item.label | translate }}</h5>
         </div>
       </div>
     </div>
-    <div *ngIf="rolesDataList.length === 0" class="role-item role-problem primary-border">
+    <div
+      *ngIf="rolesDataList.length === 0"
+      class="role-item role-problem primary-border"
+    >
       <div class="d-flex align-content-center flex-row">
         <div class="role-img align-self-center">
           <img
@@ -32,7 +35,7 @@
           />
         </div>
         <div class="role-info align-self-center">
-          <p>The current user has no roles !</p>
+          <p>{{ "global.roles.noRole" | translate }}</p>
         </div>
       </div>
     </div>

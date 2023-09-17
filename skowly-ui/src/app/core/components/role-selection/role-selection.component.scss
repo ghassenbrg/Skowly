@@ -37,8 +37,9 @@
 
 .role-item {
   position: relative;
-  width: 300px;
+  min-width: 300px;
   margin: 10px;
+  padding: 5px 10px;
   background-color: white;
   display: flex;
   flex-direction: row;
@@ -46,6 +47,7 @@
   &:hover {
     background-color: #fbf9f7;
   }
+
 }
 
 .role-problem {
@@ -58,5 +60,5 @@
 
 .role-image {
   width: 100px;
-  padding: 10px 15px;
+  padding: 10px 10px;
 }
