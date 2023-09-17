@@ -1,6 +1,7 @@
+import { SecurityRolesData } from './../../constants/security-role.constant';
 import { Component } from '@angular/core';
 import { UiService } from '../../services/ui.service';
-import { keycloak } from 'src/main';
+import { AuthenticationService } from './../../auth/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -9,20 +10,31 @@ import { keycloak } from 'src/main';
 })
 export class HeaderComponent {
   isFullScreen: boolean = false;
-  userInfo: any = keycloak.userInfo;
+  userInfo: any;
 
-  constructor(protected uiService: UiService) {}
+  constructor(
+    protected uiService: UiService,
+    private auth: AuthenticationService
+  ) {
+    this.userInfo = this.auth.getUserInfo();
+    this.userInfo.role = SecurityRolesData[this.auth.getSelectedRole()]?.label;
+  }
 
   ngOnInit() {
-    this.userInfo.role = 'Parent';
     this.isFullScreen = document.fullscreenElement ? true : false;
     // Add fullscreen change event listener
-    document.addEventListener('fullscreenchange', this.onFullscreenChange.bind(this));
+    document.addEventListener(
+      'fullscreenchange',
+      this.onFullscreenChange.bind(this)
+    );
   }
 
   ngOnDestroy() {
     // Remove fullscreen change event listener
-    document.removeEventListener('fullscreenchange', this.onFullscreenChange.bind(this));
+    document.removeEventListener(
+      'fullscreenchange',
+      this.onFullscreenChange.bind(this)
+    );
   }
 
   onFullscreenChange() {

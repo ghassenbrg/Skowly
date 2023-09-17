@@ -11,7 +11,7 @@ export class AuthenticationService {
   // Initialization Methods
   async initializeApp(): Promise<void> {
     try {
-      this.setDefaultRoleIfSingle();
+      this.getSelectedRole();
       const userInfo: any = this.getUserInfo();
 
       if (!this.getProfile()) {
@@ -57,7 +57,7 @@ export class AuthenticationService {
     }
   }
 
-  getSelectedRole(): string | null {
+  getSelectedRole(): string {
     let selectedRole = localStorage.getItem(LocalStorageKeys.roleStorageKey);
     if (selectedRole && !this.getRoles().includes(selectedRole)) {
       if (!this.setDefaultRoleIfSingle()) {
@@ -65,7 +65,7 @@ export class AuthenticationService {
       }
       selectedRole = localStorage.getItem(LocalStorageKeys.roleStorageKey);
     }
-    return selectedRole;
+    return selectedRole ?? '';
   }
 
   private setDefaultRoleIfSingle(): boolean {
