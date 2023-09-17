@@ -1,17 +1,18 @@
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { NgModule, APP_INITIALIZER  } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { AuthenticationService } from './core/auth/auth.service';
+import { CoreModule } from './core/core.module';
 import { RequestInterceptor } from './core/interceptors/request.interceptor';
 import { PlateformManagementModule } from './features/plateform-management/plateform-management.module';
 import { PrivatePageComponent } from './private-page/private-page.component';
 import { PublicPageComponent } from './public-page/public-page.component';
+import { SharedModule } from './shared/shared.module';
 import { UnauthorizedPageComponent } from './unauthorized-page/unauthorized-page.component';
-import { CoreModule } from './core/core.module';
-import { AuthenticationService } from './core/auth/auth.service';
 
 export function initializeApp(authService: AuthenticationService) {
   return (): Promise<any> => {
@@ -32,6 +33,7 @@ export function initializeApp(authService: AuthenticationService) {
     AppRoutingModule,
     HttpClientModule,
     CoreModule,
+    SharedModule,
     PlateformManagementModule,
   ],
   providers: [

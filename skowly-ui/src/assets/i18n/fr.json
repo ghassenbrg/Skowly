@@ -1,0 +1,7 @@
+{
+  "core": {
+    "roleSelection": {
+      "loginAs": "Se connecter en tant que:"
+    }
+  }
+}
