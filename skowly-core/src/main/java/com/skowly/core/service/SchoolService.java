@@ -6,13 +6,19 @@ import org.springframework.stereotype.Service;
 import com.skowly.core.domain.model.School;
 import com.skowly.core.domain.repository.SchoolRepository;
 
+import jakarta.transaction.Transactional;
+
 import java.util.List;
 
 @Service
 public class SchoolService {
 
+	@Autowired
+	UserService userService;
+	
     @Autowired
     private SchoolRepository schoolRepository;
+    
 
     public List<School> getAllSchools() {
         return schoolRepository.findAll();
@@ -22,9 +28,20 @@ public class SchoolService {
         return schoolRepository.findById(id).orElse(null);
     }
 
-    public School createSchool(School school) {
-        return schoolRepository.save(school);
-    }
+	@Transactional
+	public School createSchool(School school) {
+		school = schoolRepository.save(school);
+		try {
+			userService.createSchoolAdminUser(school.getPrincipal().getPrincipalName(),
+					school.getPrincipal().getPrincipalEmail(), school.getId().toString());
+			return school;
+		} catch (Exception e) {
+
+			e.printStackTrace();
+			return null;
+		}
+
+	}
 
     public School updateSchool(Long id, School updatedSchool) {
         School existingSchool = getSchoolById(id);
