@@ -13,7 +13,8 @@
         *ngIf="selectedRole === item.value"
         class="fa-regular fa-circle-check check-icon"
       ></i>
-      <div class="d-flex align-content-center flex-row">
+      <!-- <div class="d-flex align-content-center flex-row"> -->
+        <div>
         <div class="role-img align-self-center">
           <img [src]="item.imgUrl" alt="Role Image" class="role-image" />
         </div>
@@ -24,9 +25,9 @@
     </div>
     <div
       *ngIf="rolesDataList.length === 0"
-      class="role-item role-problem primary-border"
+      class="role-problem primary-border"
     >
-      <div class="d-flex align-content-center flex-row">
+      <div class="">
         <div class="role-img align-self-center">
           <img
             src="/assets/img/roles/problem.png"
