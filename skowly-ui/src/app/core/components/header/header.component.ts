@@ -1,7 +1,7 @@
-import { SecurityRolesData } from './../../constants/security-role.constant';
 import { Component } from '@angular/core';
 import { UiService } from '../../services/ui.service';
 import { AuthenticationService } from './../../auth/auth.service';
+import { SecurityRolesData } from './../../constants/security-role.constant';
 
 @Component({
   selector: 'app-header',
@@ -11,6 +11,7 @@ import { AuthenticationService } from './../../auth/auth.service';
 export class HeaderComponent {
   isFullScreen: boolean = false;
   userInfo: any;
+  selectedLang: string;
 
   constructor(
     protected uiService: UiService,
@@ -18,6 +19,7 @@ export class HeaderComponent {
   ) {
     this.userInfo = this.auth.getUserInfo();
     this.userInfo.role = SecurityRolesData[this.auth.getSelectedRole()]?.label;
+    this.selectedLang = this.auth.getProfile() as string;
   }
 
   ngOnInit() {

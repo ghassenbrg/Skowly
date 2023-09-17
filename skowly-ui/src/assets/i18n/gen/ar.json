@@ -9,6 +9,24 @@
       "parent": "وليّ",
       "student": "طالب",
       "teacher": "مدرّس"
+    },
+    "language": {
+      "en": "الإنجليزية",
+      "fr": "الفرنسية",
+      "ar": "العربية"
+    },
+    "sidebar": {
+      "menu": "القائمة",
+      "selectAnotherStudent": "إختيار طالب آخر"
+    },
+    "menu": {
+      "home": "الرئيسيّة",
+      "schools": "المدارس",
+      "profileDetails": "الملف الشخصي",
+      "courses": "الدروس",
+      "calendar": "التقويم",
+      "academicAndAttendance": "التفاصيل الأكاديمية والحضور",
+      "feesAndPayments": "الرسوم والمدفوعات"
     }
   }
 }

@@ -15,51 +15,54 @@ export class SidebarComponent {
 
   menu: MenuItem[] = [
     {
-      label: 'Home',
+      label: 'global.menu.home',
       path: '/dashboard',
       icon: 'fa-solid fa-house-chimney',
       color: '#E57676',
     },
     {
-      label: 'Schools',
+      label: 'global.menu.schools',
       path: '/dashboard/platform-management/schools',
       icon: 'fa-solid fa-graduation-cap',
       color: '#E17DA5',
     },
     {
-      label: 'Profile & Details',
+      label: 'global.menu.profileDetails',
       path: '/student-profile',
       icon: 'fa-solid fa-chalkboard-user',
       color: '#F3A533',
     },
     {
-      label: 'Courses',
+      label: 'global.menu.courses',
       path: '/courses',
       icon: 'fa-solid fa-book',
       color: '#59BBDE',
     },
     {
-      label: 'Calendar',
+      label: 'global.menu.calendar',
       path: '/calendar',
       icon: 'fa-solid fa-calendar-days',
       color: '#6f82e0',
     },
     {
-      label: 'Academic & Attendance',
+      label: 'global.menu.academicAndAttendance',
       path: '/dashboard/platform-management/create-school',
       icon: 'fa-solid fa-graduation-cap',
       color: '#E17DA5',
     },
     {
-      label: 'Fees & Payments',
+      label: 'global.menu.feesAndPayments',
       path: '/fees',
       icon: 'fa-solid fa-money-check-dollar',
       color: '#67D293',
     },
   ];
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute, protected uiService: UiService) {
-  }
+  constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    protected uiService: UiService
+  ) {}
 
   ngOnInit() {
     //this.setFullPath();

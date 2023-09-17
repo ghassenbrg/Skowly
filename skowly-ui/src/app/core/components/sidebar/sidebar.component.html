@@ -22,12 +22,13 @@
       <div class="grade">1st Grade - B</div>
       <!-- Select another child button -->
       <button class="btn btn-primary">
-        <i class="fa-solid fa-repeat"></i> Select Another Child
+        <i class="fa-solid fa-repeat"></i>
+        {{ "global.sidebar.selectAnotherStudent" | translate }}
       </button>
     </div>
 
     <!-- Menu -->
-    <span class="menu-label">Menu</span>
+    <span class="menu-label">{{ "global.sidebar.menu" | translate }}</span>
     <ul class="menu-list">
       <li
         *ngFor="let item of menu"
@@ -41,7 +42,7 @@
               }
             : { 'background-color': 'transparent' }
         "
-        [pTooltip]="item.label"
+        [pTooltip]="item.label | translate"
         [tooltipDisabled]="(uiService.sidebarExpansion$ | async) ? true : false"
         (mouseover)="onMouseOver(item)"
         (mouseout)="onMouseOut()"
@@ -54,9 +55,9 @@
               : { color: item.color }
           "
         ></i>
-        <span *ngIf="uiService.sidebarExpansion$ | async">{{
-          item.label
-        }}</span>
+        <span *ngIf="uiService.sidebarExpansion$ | async">
+          {{ item.label | translate }}
+        </span>
       </li>
     </ul>
   </div>

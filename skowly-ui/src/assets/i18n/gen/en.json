@@ -9,6 +9,24 @@
       "parent": "Parent",
       "student": "Student",
       "teacher": "Teacher"
+    },
+    "language": {
+      "en": "English",
+      "fr": "French",
+      "ar": "Arabic"
+    },
+    "sidebar": {
+      "menu": "Menu",
+      "selectAnotherStudent": "Select Another Student"
+    },
+    "menu": {
+      "home": "Home",
+      "schools": "Schools",
+      "profileDetails": "Profile Details",
+      "courses": "Courses",
+      "calendar": "Calendar",
+      "academicAndAttendance": "Academic & Attendance",
+      "feesAndPayments": "Fees & Payments"
     }
   }
 }

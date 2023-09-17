@@ -12,7 +12,7 @@
     />
     <div class="user-details">
       <span class="user-name text">{{ userInfo.name }}</span>
-      <span class="user-role">{{ userInfo.role }}</span>
+      <span class="user-role">{{ userInfo.role | translate }}</span>
     </div>
     <div class="header-icon down-icon">
       <i class="fa-solid fa-caret-down"></i>
@@ -24,7 +24,7 @@
       <i class="fa-solid fa-language"></i>
     </div>
     <div class="selected-language">
-      <span class="text">English</span>
+      <span class="text">{{ 'global.language.'+selectedLang | translate }}</span>
     </div>
     <div class="header-icon down-icon">
       <i class="fa-solid fa-caret-down"></i>
