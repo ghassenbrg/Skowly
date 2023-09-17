@@ -42,7 +42,7 @@ public class UserService {
 		List<String> roles = new ArrayList<>();
 		roles.add(SecurityRole.ROLE_ADMIN.getValue());
 		user.setRealmRoles(roles);
-		createRolesIfNotExist(realm, Arrays.asList(SecurityRole.values()).stream().map(e->e.getValue()).toList());
+		createRolesIfNotExist(realm, Arrays.asList(SecurityRole.values()).stream().map(e->e.getValue().replace("ROLE_", "")).toList());
 		Map<String, List<String>> attributes = new HashMap<>();
 		List<String> schoolIdAttribute = new ArrayList<>();
 		schoolIdAttribute.add(schoolId);
