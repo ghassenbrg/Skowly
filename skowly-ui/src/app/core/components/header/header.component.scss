@@ -34,9 +34,21 @@
   display: block;
 }
 
-.text {
+.text,
+.dropdown-item-text {
   color: #565675;
   font-size: 0.95em;
+}
+
+.dropdown-item-text {
+  cursor: pointer;
+  &.active {
+    color: #fff;
+    background-color: #565675;
+  }
+  &:active {
+    background-color: #c0c0da;
+  }
 }
 
 .user-section .user-role {
@@ -66,5 +78,11 @@
   transition: transform 0.2s;
   &:hover {
     transform: scale(1.1);
+  }
+}
+
+.language-selection {
+  .dropdown-toggle::after {
+    display: none;
   }
 }

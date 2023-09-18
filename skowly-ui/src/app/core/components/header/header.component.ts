@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, Renderer2, HostListener } from '@angular/core';
+import { languagesList } from '../../constants/language.constant';
 import { UiService } from '../../services/ui.service';
 import { AuthenticationService } from './../../auth/auth.service';
 import { SecurityRolesData } from './../../constants/security-role.constant';
@@ -12,8 +13,12 @@ export class HeaderComponent {
   isFullScreen: boolean = false;
   userInfo: any;
   selectedLang: string;
+  supportedLanguages: any[] = languagesList;
+  dropdownOpen = false;
 
   constructor(
+    private renderer: Renderer2,
+    private el: ElementRef,
     protected uiService: UiService,
     private auth: AuthenticationService
   ) {
@@ -37,6 +42,11 @@ export class HeaderComponent {
       'fullscreenchange',
       this.onFullscreenChange.bind(this)
     );
+  }
+
+  changeLanguage(lang: string) {
+    //this.selectedLang = lang;
+    this.auth.setProfile(lang, true);
   }
 
   onFullscreenChange() {
@@ -82,4 +92,32 @@ export class HeaderComponent {
       (document as any).msExitFullscreen();
     }
   }
+
+  @HostListener('document:click', ['$event'])
+  handleDocumentClick(event: Event) {
+    const dropdown = this.el.nativeElement.querySelector('.dropdown');
+    if (dropdown && !dropdown.contains(event.target)) {
+      this.closeDropdown();
+    }
+  }
+
+  toggleDropdown() {
+    this.dropdownOpen = !this.dropdownOpen;
+    this.updateDropdownDisplay();
+  }
+
+  closeDropdown() {
+    this.dropdownOpen = false;
+    this.updateDropdownDisplay();
+  }
+
+  updateDropdownDisplay() {
+    const dropdownMenu = this.el.nativeElement.querySelector('.dropdown-menu');
+    if (this.dropdownOpen) {
+      this.renderer.addClass(dropdownMenu, 'show');
+    } else {
+      this.renderer.removeClass(dropdownMenu, 'show');
+    }
+  }
+
 }

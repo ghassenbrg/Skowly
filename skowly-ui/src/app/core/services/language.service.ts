@@ -16,12 +16,9 @@ export class LanguageService {
     this.changeLanguageByObj(languageObj);
   }
 
-  changeLanguageByObj(languageObj: any, reload?: boolean) {
+  changeLanguageByObj(languageObj: any) {
     this.translate.use(languageObj.value);
     this.direction = languageObj.direction;
-    if (reload) {
-      location.reload();
-    }
   }
 
   setDefaultLang() {

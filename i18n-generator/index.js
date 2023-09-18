@@ -11,50 +11,50 @@ function parseExcelToJSON(excelFilePath) {
   console.log(`Reading excel file from ${excelFilePath}...`);
 
   const sheetNameList = workbook.SheetNames;
-  const ws = workbook.Sheets[sheetNameList[0]];
-  const data = XLSX.utils.sheet_to_json(ws);
 
-  console.log("Excel file parsed to JSON.");
+  const masterLangJson = {}; // Master JSON object to hold data from all sheets
 
-  const langs = new Set();
-  const langJson = {};
+  sheetNameList.forEach((sheetName) => { // Iterate through each sheet
+    const ws = workbook.Sheets[sheetName];
+    const data = XLSX.utils.sheet_to_json(ws);
 
-  let lastFeature, lastComponent;
+    console.log(`Parsing sheet: ${sheetName}`);
 
-  for (const row of data) {
-    let { feature, 'component/scope': component, value, ...rest } = row;
+    let lastFeature, lastComponent;
 
-    feature = feature || lastFeature;
-    component = component || lastComponent;
+    for (const row of data) {
+      let { feature, 'component/scope': component, value, ...rest } = row;
 
-    lastFeature = feature;
-    lastComponent = component;
+      feature = feature || lastFeature;
+      component = component || lastComponent;
 
-    for (const [lang, langValue] of Object.entries(rest)) {
-      langs.add(lang);
+      lastFeature = feature;
+      lastComponent = component;
 
-      if (!langJson[lang]) {
-        langJson[lang] = {};
-      }
+      for (const [lang, langValue] of Object.entries(rest)) {
+        if (!masterLangJson[lang]) {
+          masterLangJson[lang] = {};
+        }
 
-      if (feature && component && value && langValue) {
-        deepSet(langJson[lang], feature, component, value, langValue);
+        if (feature && component && value && langValue) {
+          deepSet(masterLangJson[lang], feature, component, value, langValue);
+        }
       }
     }
-  }
+  });
 
   const dir = './src/assets/i18n/gen';
 
   // Check if directory exists; if not, create it.
   if (!fs.existsSync(dir)) {
-    console.log("Directory does not exist. Creating directory...");
+    console.log(`Directory ${dir} does not exist. Creating directory...`);
     fs.mkdirSync(dir);
   }
 
-  for (const lang of langs) {
+  for (const [lang, jsonData] of Object.entries(masterLangJson)) {
     const filePath = path.join(dir, `${lang}.json`);
-    fs.writeFileSync(filePath, JSON.stringify(langJson[lang], null, 2));
-    console.log(`Generated JSON file for language: ${lang}`);
+    fs.writeFileSync(filePath, JSON.stringify(jsonData, null, 2));
+    console.log(`Generated consolidated JSON file for language: ${lang}`);
   }
 
   console.log("Files have been generated successfully.");

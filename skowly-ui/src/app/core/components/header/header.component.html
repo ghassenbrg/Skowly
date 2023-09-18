@@ -19,16 +19,35 @@
     </div>
   </div>
   <!-- ----------- language ----------- -->
-  <div class="header-section">
-    <div class="header-icon">
-      <i class="fa-solid fa-language"></i>
+  <div class="language-selection dropdown">
+    <div
+      class="header-section dropdown-toggle"
+      id="dropdownMenuLanguage"
+      (click)="toggleDropdown()"
+    >
+      <div class="header-icon">
+        <i class="fa-solid fa-language"></i>
+      </div>
+      <div class="selected-language">
+        <span class="text">
+          {{ "global.language." + selectedLang | translate }}
+        </span>
+      </div>
+      <div class="header-icon down-icon">
+        <i class="fa-solid fa-caret-down"></i>
+      </div>
     </div>
-    <div class="selected-language">
-      <span class="text">{{ 'global.language.'+selectedLang | translate }}</span>
-    </div>
-    <div class="header-icon down-icon">
-      <i class="fa-solid fa-caret-down"></i>
-    </div>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLanguage">
+      <li *ngFor="let lang of supportedLanguages">
+        <span
+          class="dropdown-item dropdown-item-text"
+          [ngClass]="{ active: lang === selectedLang }"
+          (click)="changeLanguage(lang)"
+        >
+          {{ "global.language." + lang | translate }}
+        </span>
+      </li>
+    </ul>
   </div>
   <!-- ----------- notification ----------- -->
   <div class="header-section icon-only">

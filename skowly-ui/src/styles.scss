@@ -8,8 +8,59 @@ body {
     background-color: #F4F8FB;
 }
 
-.primary-border {
+.primary-light-border {
   border: 1px solid #d8d8e8;
   border-radius: 8px;
 }
 
+/* This will apply to all scrollable elements */
+::-webkit-scrollbar {
+  width: 8px;  /* for vertical scrollbars */
+  height: 8px; /* for horizontal scrollbars */
+}
+
+::-webkit-scrollbar-track {
+  background: $primary-light;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $primary;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: $primary-dark;
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: $primary $primary-light;
+}
+
+/* Your specific container */
+.custom-scroll {
+  overflow-y: auto;
+  height: 300px; /* Set a specific height */
+}
+
+/* You can also apply these styles directly to .custom-scroll instead of globally */
+.custom-scroll::-webkit-scrollbar {
+  width: 12px;
+}
+
+.custom-scroll::-webkit-scrollbar-track {
+  background: $primary-light;
+}
+
+.custom-scroll::-webkit-scrollbar-thumb {
+  background: $primary;
+}
+
+.custom-scroll::-webkit-scrollbar-thumb:hover {
+  background: $primary-dark;
+}
+
+.custom-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: $primary $primary-light;
+}

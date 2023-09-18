@@ -76,7 +76,11 @@ export class AuthenticationService {
   setProfile(profile: string, reload?: boolean): void {
     let languageObj: any = this.languageService.getLanguageObj(profile);
     localStorage.setItem(LocalStorageKeys.profileKey, languageObj.value);
-    this.languageService.changeLanguageByObj(languageObj, reload);
+    if (!reload) {
+      this.languageService.changeLanguageByObj(languageObj);
+    } else {
+      location.reload();
+    }
   }
 
   getProfile(): string | null {
