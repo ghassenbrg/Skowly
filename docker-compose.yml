@@ -117,6 +117,16 @@ services:
       CONFIG_SERVER_URL: http://config-server:${config_server_internal_port}
       KEYCLOAK_ISSUER_URI: http://localhost/auth/realms/${keycloak_realm}
       KEYCLOAK_JWK_SET_URI: http://skowly-ui:80/auth/realms/${keycloak_realm}/protocol/openid-connect/certs
+      KEYCLOAK_SERVER_URL: http://localhost/auth
+      KEYCLOAK_REALM: ${keycloak_realm}
+      KEYCLOAK_RESOURCE: ${keycloak_resource}
+      KEYCLOAK_SECRET: ${keycloak_resource_secret}
+      mail_host: ${mail_host}
+      mail_port: ${mail_port}
+      mail_username: ${mail_username}
+      mail_password: ${mail_password}
+      mail_smtp_auth: ${mail_smtp_auth}
+      mail_smtp_starttls_enable: ${mail_smtp_starttls_enable}
       DB_URL: jdbc:postgresql://db-skowly-core:5432/${db_skowly_core_db}
       DB_USER: ${db_skowly_core_user}
       DB_PASSWORD: ${db_skowly_core_password}
@@ -152,13 +162,17 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+
   mailhog:
     image: mailhog/mailhog
     ports:
-      - "1025:1025"  
-      - "8025:8025"  
+      #smtp port
+      - "1025:1025"
+      # http port
+      - "8025:8025"
     networks:
       - skowly-network
+
 networks:
   skowly-network:
     driver: bridge
