@@ -42,6 +42,7 @@
 
 .dropdown-item-text {
   cursor: pointer;
+  padding: 7px 5px;
   &.active {
     color: #fff;
     background-color: #565675;
@@ -85,4 +86,20 @@
   .dropdown-toggle::after {
     display: none;
   }
+}
+
+.dropdown-menu {
+  border-color: #d8d8e8;
+  margin-top: 10px;
+  box-shadow: 2px 0px 10px 1px rgba(32, 30, 69, 0.4);
+  -webkit-box-shadow: 2px 0px 10px 1px rgba(32, 30, 69, 0.4);
+  -moz-box-shadow: 2px 0px 10px 1px rgba(32, 30, 69, 0.4);
+}
+
+.menu-item {
+  padding: 4px 5px;
+}
+
+hr {
+  margin: 0;
 }

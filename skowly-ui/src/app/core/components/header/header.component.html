@@ -1,29 +1,55 @@
 <div class="skowly-header d-flex flex-row-reverse">
   <!-- ----------- user-section ----------- -->
-  <div class="header-section user-section">
-    <img
-      [src]="
-        userInfo.avatar_url
-          ? userInfo.avatar_url
-          : '/assets/temp/user_avatar.png'
-      "
-      alt="User Avatar"
-      class="user-avatar"
-    />
-    <div class="user-details">
-      <span class="user-name text">{{ userInfo.name }}</span>
-      <span class="user-role">{{ userInfo.role | translate }}</span>
+  <div class="language-selection dropdown userSectionOpen-dropdown">
+    <div
+      class="header-section user-section dropdown-toggle"
+      id="dropdownMenuUserSection"
+      (click)="toggleDropdown('userSectionOpen')"
+    >
+      <img
+        [src]="
+          userInfo.avatar_url
+            ? userInfo.avatar_url
+            : '/assets/temp/user_avatar.png'
+        "
+        alt="User Avatar"
+        class="user-avatar"
+      />
+      <div class="user-details">
+        <span class="user-name text">{{ userInfo.name }}</span>
+        <span class="user-role">{{ userInfo.role | translate }}</span>
+      </div>
+      <div class="header-icon down-icon">
+        <i class="fa-solid fa-caret-down"></i>
+      </div>
     </div>
-    <div class="header-icon down-icon">
-      <i class="fa-solid fa-caret-down"></i>
-    </div>
+    <ul
+      class="dropdown-menu userSectionOpen"
+      [@slideToggle]="dropdowns.userSectionOpen ? 'open' : 'closed'"
+      aria-labelledby="dropdownMenuUserSection"
+      style="overflow: hidden"
+    >
+      <li *ngIf="userRolesListSize > 0">
+        <span class="dropdown-item dropdown-item-text" (click)="showDialog()">
+          <i class="fa-solid fa-briefcase"></i>
+          {{ "global.roles.changeRole" | translate }}
+        </span>
+      </li>
+      <hr />
+      <li>
+        <span class="dropdown-item dropdown-item-text" (click)="logout()">
+          <i class="fa-solid fa-right-from-bracket"></i>
+          {{ "global.menu.logOut" | translate }}
+        </span>
+      </li>
+    </ul>
   </div>
   <!-- ----------- language ----------- -->
-  <div class="language-selection dropdown">
+  <div class="language-selection dropdown languageOpen-dropdown">
     <div
       class="header-section dropdown-toggle"
       id="dropdownMenuLanguage"
-      (click)="toggleDropdown()"
+      (click)="toggleDropdown('languageOpen')"
     >
       <div class="header-icon">
         <i class="fa-solid fa-language"></i>
@@ -37,8 +63,13 @@
         <i class="fa-solid fa-caret-down"></i>
       </div>
     </div>
-    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLanguage">
-      <li *ngFor="let lang of supportedLanguages">
+    <ul
+      class="dropdown-menu languageOpen"
+      [@slideToggle]="dropdowns.languageOpen ? 'open' : 'closed'"
+      aria-labelledby="dropdownMenuLanguage"
+      style="overflow: hidden"
+    >
+      <li *ngFor="let lang of supportedLanguages; let i = index">
         <span
           class="dropdown-item dropdown-item-text"
           [ngClass]="{ active: lang === selectedLang }"
@@ -46,6 +77,9 @@
         >
           {{ "global.language." + lang | translate }}
         </span>
+        <!--
+        <hr *ngIf="i + 1 < supportedLanguages.length" />
+        -->
       </li>
     </ul>
   </div>
@@ -115,3 +149,16 @@
     />
   </div>
 </div>
+
+<!-- --------------- role selection dialog ---------------------- -->
+<p-dialog
+  [header]="'global.roles.roleSelection' | translate"
+  [(visible)]="displayRoleSelectionDialog"
+  [style]="{ 'max-width': '50vw' }"
+  [dismissableMask]="true"
+  [modal]="true"
+>
+  <div style="position: relative">
+    <app-role-selection [isEmbedded]="true"></app-role-selection>
+  </div>
+</p-dialog>

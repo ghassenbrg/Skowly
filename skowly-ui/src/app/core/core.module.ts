@@ -11,6 +11,7 @@ import { SharedModule } from '../shared/shared.module';
 import { HeaderComponent } from './components/header/header.component';
 import { RoleSelectionComponent } from './components/role-selection/role-selection.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { DialogModule } from 'primeng/dialog';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
     FormsModule,
     BadgeModule,
     TooltipModule,
+    DialogModule,
   ],
   exports: [DashboardPageComponent, RoleSelectionComponent],
 })

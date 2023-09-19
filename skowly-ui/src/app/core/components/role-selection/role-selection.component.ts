@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from './../../auth/auth.service';
 import { rolesDataList } from './../../constants/security-role.constant';
@@ -9,6 +9,8 @@ import { rolesDataList } from './../../constants/security-role.constant';
   styleUrls: ['./role-selection.component.scss'],
 })
 export class RoleSelectionComponent {
+  @Input()
+  isEmbedded: boolean = false;
   rolesDataList: any[] = [...rolesDataList];
   selectedRole: string | null;
 

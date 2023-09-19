@@ -1,4 +1,11 @@
-import { Component, ElementRef, Renderer2, HostListener } from '@angular/core';
+import {
+  animate,
+  state,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
+import { Component, ElementRef, HostListener, Renderer2 } from '@angular/core';
 import { languagesList } from '../../constants/language.constant';
 import { UiService } from '../../services/ui.service';
 import { AuthenticationService } from './../../auth/auth.service';
@@ -8,13 +15,35 @@ import { SecurityRolesData } from './../../constants/security-role.constant';
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
+  animations: [
+    trigger('slideToggle', [
+      state(
+        'open',
+        style({
+          height: '*',
+        })
+      ),
+      state(
+        'closed',
+        style({
+          height: '0px',
+        })
+      ),
+      transition('open <=> closed', [animate('100ms ease-in-out')]),
+    ]),
+  ],
 })
 export class HeaderComponent {
   isFullScreen: boolean = false;
   userInfo: any;
   selectedLang: string;
   supportedLanguages: any[] = languagesList;
-  dropdownOpen = false;
+  dropdowns: any = {
+    userSectionOpen: false,
+    languageOpen: false,
+  };
+  userRolesListSize: number;
+  displayRoleSelectionDialog: boolean = false;
 
   constructor(
     private renderer: Renderer2,
@@ -25,6 +54,7 @@ export class HeaderComponent {
     this.userInfo = this.auth.getUserInfo();
     this.userInfo.role = SecurityRolesData[this.auth.getSelectedRole()]?.label;
     this.selectedLang = this.auth.getProfile() as string;
+    this.userRolesListSize = this.auth.getRoles().length;
   }
 
   ngOnInit() {
@@ -42,6 +72,10 @@ export class HeaderComponent {
       'fullscreenchange',
       this.onFullscreenChange.bind(this)
     );
+  }
+
+  logout() {
+    this.auth.logout('/');
   }
 
   changeLanguage(lang: string) {
@@ -95,29 +129,36 @@ export class HeaderComponent {
 
   @HostListener('document:click', ['$event'])
   handleDocumentClick(event: Event) {
-    const dropdown = this.el.nativeElement.querySelector('.dropdown');
-    if (dropdown && !dropdown.contains(event.target)) {
-      this.closeDropdown();
-    }
+    Object.keys(this.dropdowns).forEach((key) => {
+      const dropdown = this.el.nativeElement.querySelector(`.${key}-dropdown`);
+      if (dropdown && !dropdown.contains(event.target)) {
+        this.closeDropdown(key);
+      }
+    });
   }
 
-  toggleDropdown() {
-    this.dropdownOpen = !this.dropdownOpen;
-    this.updateDropdownDisplay();
+  toggleDropdown(dropdownVarName: string) {
+    this.dropdowns[dropdownVarName] = !this.dropdowns[dropdownVarName];
+    this.updateDropdownDisplay(dropdownVarName);
   }
 
-  closeDropdown() {
-    this.dropdownOpen = false;
-    this.updateDropdownDisplay();
+  closeDropdown(dropdownVarName: string) {
+    this.dropdowns[dropdownVarName] = false;
+    this.updateDropdownDisplay(dropdownVarName);
   }
 
-  updateDropdownDisplay() {
-    const dropdownMenu = this.el.nativeElement.querySelector('.dropdown-menu');
-    if (this.dropdownOpen) {
+  updateDropdownDisplay(dropdownVarName: string) {
+    const dropdownMenu = this.el.nativeElement.querySelector(
+      `.${dropdownVarName}`
+    );
+    if (this.dropdowns[dropdownVarName]) {
       this.renderer.addClass(dropdownMenu, 'show');
     } else {
       this.renderer.removeClass(dropdownMenu, 'show');
     }
   }
 
+  showDialog() {
+    this.displayRoleSelectionDialog = !this.displayRoleSelectionDialog;
+  }
 }

@@ -1,5 +1,5 @@
-<div class="role-selection-container">
-  <h1 class="role-selection-title">{{ "global.roles.loginAs" | translate }}</h1>
+<div class="role-selection-container" [ngClass]="{'screen-mode': !isEmbedded}">
+  <h1 *ngIf="!isEmbedded" class="role-selection-title">{{ "global.roles.loginAs" | translate }}</h1>
   <div
     class="role-container d-flex align-content-center justify-content-center flex-wrap"
   >

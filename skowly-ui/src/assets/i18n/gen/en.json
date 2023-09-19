@@ -8,6 +8,8 @@
       "schoolStaff": "School Staff",
       "parent": "Parent",
       "student": "Student",
+      "changeRole": "Change role",
+      "roleSelection": "Role Selection",
       "teacher": "Teacher"
     },
     "language": {
@@ -26,7 +28,9 @@
       "courses": "Courses",
       "calendar": "Calendar",
       "academicAndAttendance": "Academic & Attendance",
-      "feesAndPayments": "Fees & Payments"
+      "feesAndPayments": "Fees & Payments",
+      "logOut": "Log Out",
+      "logIn": "Log In"
     }
   }
 }

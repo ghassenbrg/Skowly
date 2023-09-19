@@ -8,6 +8,8 @@
       "schoolStaff": "موظّف بالمدرسة",
       "parent": "وليّ",
       "student": "طالب",
+      "changeRole": "تغيير صفة المستخدم",
+      "roleSelection": "اختيار صفة المستخدم",
       "teacher": "مدرّس"
     },
     "language": {
@@ -26,7 +28,9 @@
       "courses": "الدروس",
       "calendar": "التقويم",
       "academicAndAttendance": "التفاصيل الأكاديمية والحضور",
-      "feesAndPayments": "الرسوم والمدفوعات"
+      "feesAndPayments": "الرسوم والمدفوعات",
+      "logOut": "تسجيل الخروج",
+      "logIn": "تسجيل الدخول"
     }
   }
 }
